@@ -28,3 +28,6 @@ Route::get('/overview', function(){
 Route::get('/overlay/all', function(){
     return new OverlayCollection(Device::all());
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
