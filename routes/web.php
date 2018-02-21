@@ -2,6 +2,8 @@
 
 use App\Http\Resources\OverviewCollection;
 use App\Hall;
+use App\Http\Resources\OverlayCollection;
+use App\Device;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,14 @@ use App\Hall;
 */
 
 Route::get('/', function () {
+    return 'API home page';
+});
 
+
+Route::get('/overview', function(){
     return new OverviewCollection(Hall::all());
+});
 
+Route::get('/overlay/all', function(){
+    return new OverlayCollection(Device::all());
 });
