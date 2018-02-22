@@ -17,9 +17,23 @@
     <div id="app">
         
         
-        @include('layout.navbar')
+        <div class="hero is-info is-bold is-medium" style="background-image: url('{{asset('media/icons-background.svg')}}'); background-position: center;background-size:cover">
+            {{--  Navbar  --}}
+            <div class="hero-head">
+                @include('layouts.navbar')    
+            </div>           
+        </div>
 
         @yield('content')
+
+
+        <div class="container is-fluid has-text-centered">
+            <br>
+            <br>
+            <hr>
+            <p>Made with ❤️ by Bashar Abu Joub</p>
+            <br>
+        </div>
 
     </div>
     <!-- Scripts -->

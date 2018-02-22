@@ -31,7 +31,7 @@ class Announcement extends Model
     public function getTypeTitle(){
         switch ($this->type){
             case AnnouncementType::CANCEL : 
-                return 'Canceled';
+                return 'Cancelled';
             case AnnouncementType::DELAY : 
                 return 'Delayed';
             default:

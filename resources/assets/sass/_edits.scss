@@ -1,0 +1,42 @@
+.title{
+    font-weight: 200;
+}
+
+.navbar-link::after{
+    border-color: rgba(255, 255, 255, 0.7098039215686275) !important;
+}
+.navbar-dropdown .navbar-item{
+    color: #767676 !important;
+}
+.navbar-dropdown .navbar-item:hover{
+    color: #303030 !important;
+}
+
+.label{
+    font-weight: 400;
+}
+
+
+.container{
+    padding: 20px;
+}
+
+.container-nav{
+    padding: 0;
+}
+
+hr{
+    background-color: #d2dae0;
+}
+
+html{
+    background-color: #f2f6fa;
+}
+
+.table td{
+    border-color: #f1f1f1;
+}
+
+.menu-list a:hover{
+    background-color: #e7eef4;
+}
