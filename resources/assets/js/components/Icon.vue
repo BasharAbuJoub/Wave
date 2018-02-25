@@ -16,7 +16,7 @@ export default {
             default: 40
         },
         white: Boolean,
-        large: Boolean
+        large: Boolean,
 
     }
 

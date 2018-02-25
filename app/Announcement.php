@@ -12,7 +12,7 @@ class Announcement extends Model
     //
 
     protected $fillable = [
-        'type', 'note'
+        'type', 'note', 'until'
     ];
 
 
@@ -20,7 +20,7 @@ class Announcement extends Model
         parent::boot();
 
         static::created(function($model){
-            dispatch(new AnnouncementDeleteJob($model))->delay($model->lecture->end()->addMinutes(5));
+            dispatch(new AnnouncementDeleteJob($model))->delay($model->until);
         });
     }
 

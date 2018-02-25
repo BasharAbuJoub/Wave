@@ -14264,6 +14264,29 @@ html {
 }
 
 .menu-list a:hover {
-  background-color: #e7eef4;
+  background-color: #f2f6fa;
+}
+
+.menu {
+  font-size: 16px;
+}
+
+.box {
+  -webkit-box-shadow: 0px 2px 3px rgba(208, 213, 218, 0.53), 0 0 0 1px #dde4ec;
+          box-shadow: 0px 2px 3px rgba(208, 213, 218, 0.53), 0 0 0 1px #dde4ec;
+}
+
+.m-icon {
+  position: relative !important;
+  top: 2px !important;
+  margin-right: 10px;
+}
+
+.menu-list a.is-active:hover {
+  background-color: #1f60c9;
+}
+
+.button {
+  font-weight: 400;
 }
 

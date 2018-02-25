@@ -1,5 +1,5 @@
 <nav class="navbar is-transparent">
-    <div class="container container-nav">
+    <div class="container is-fluid container-nav">
         <div class="navbar-brand">
         <a class="navbar-item">
             <h1 class="title is-3"><icon name="ion-ios-analytics-outline" size="30" large></icon>Wave</h1>
@@ -30,7 +30,7 @@
                     </a>
                     
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item">
+                    <a href="{{route('devices.index')}}" class="navbar-item">
                             <icon name="ion-ios-bolt-outline" size="30"></icon>
                             <span style="margin-left: 6px;">Devices</span>
                         </a>

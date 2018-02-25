@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Device;
+use App\Office;
+use App\Hall;
 
 class DeviceController extends Controller
 {
@@ -26,6 +28,8 @@ class DeviceController extends Controller
     public function create()
     {
         //
+     
+        return view('device.create');
     }
 
     /**
@@ -37,6 +41,33 @@ class DeviceController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'room'  => 'required',
+            'ip'    => 'required|ipv4',
+            'type'  => 'required|boolean',
+        ]);
+        if($request->type == '1'){
+            $this->validate($request, [
+                'instructor' => 'required'
+            ]);
+        }
+
+        if($request->type == '0'){
+            Hall::create()->device()->create([
+                'room' => $request->room,
+                'ip'   => $request->ip,
+            ]);
+        }else{
+            Office::create([
+                'instructor'    => $request->instructor,
+                'bio'           => $request->bio != null ? $request->bio : ''
+            ])->device()->create([
+                'room' => $request->room,
+                'ip'   => $request->ip,
+            ]);
+        }
+
+        return 'Device created';
     }
 
     /**
@@ -56,9 +87,10 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($device)
     {
-        //
+        $device = Device::with('deviceable')->find($device);
+        return view('device.edit')->with(compact('device'));
     }
 
     /**
@@ -71,7 +103,33 @@ class DeviceController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $device = Device::find($id);
+        
+        $this->validate($request, [
+            'room'  => 'required',
+            'ip'    => 'required|ipv4',
+        ]);
+        if($request->type == '1'){
+            $this->validate($request, [
+                'instructor' => 'required'
+            ]);
+        }
+    
+
+        $device->update([
+            'room' => $request->room,
+            'ip'   => $request->ip
+        ]);
+        if($device->deviceable_type != 'App\Hall'){
+            $device->deviceable->update([
+                'instructor' => $request->instructor,
+                'bio'        => $request->bio
+            ]);
+        }
+
+        return response('Updated', 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -82,5 +140,7 @@ class DeviceController extends Controller
     public function destroy($id)
     {
         //
+        Device::find($id)->delete();
+        return response('Deleted.', 200);
     }
 }

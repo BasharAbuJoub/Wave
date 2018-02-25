@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Device;
+use App\Http\Resources\DeviceResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/overview', 'API\ApiController@overview');
+
+Route::get('/devices/status', function(){
+    return ['online' => [1,2,3,4], 'offline' => [5,6,7]];
+});
+
+Route::get('/devices', function(){
+    return DeviceResource::collection(Device::all());
+});

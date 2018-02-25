@@ -17,6 +17,7 @@ class CreateAnnouncementsTable extends Migration
             $table->increments('id');
             $table->tinyInteger('type');
             $table->string('note');
+            $table->dateTime('until');
             $table->unsignedInteger('lecture_id');
             $table->timestamps();
         });

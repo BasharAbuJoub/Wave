@@ -39,6 +39,6 @@ $factory->define(Lecture::class, function (Faker $faker){
         'end'       => Carbon::now()->addMinutes(rand(30, 120))->toTimeString(),
         'office_id' => factory(Office::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,
         'hall_id'   => factory(Hall::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,
-        'days'      => [0,1,2,3,4,5,6,7],
+        'days'      => [0,2,4],
     ];
 });
