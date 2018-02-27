@@ -12,16 +12,20 @@
             <th>Instructor</th>
             <th>Start</th>
             <th>End</th>
+            <th>Days</th>
             <th>Action</th>
         </tr>
         <tr v-for="lecture in filtered">
             <td>{{lecture.course}}</td>
             <td>{{lecture.hall}}</td>
             <td>{{lecture.instructor}}</td>
-            <td>{{lecture.start}}</td>
-            <td>{{lecture.end}}</td>
+            <td>{{moment(lecture.start, 'HH:mm:ss').format('HH:mm')}}</td>
+            <td>{{moment(lecture.end, 'HH:mm:ss').format('HH:mm')}}</td>
+            <td><span v-for="day in lecture.days">{{moment().day(day).format('dd')}}. </span></td>
             <td>
-                <a href="#" class="button is-info">Anc</a>
+                <a v-if="lecture.announcement" :href="lecture.anc_link" class="button is-warning is-small">Anc</a>
+                <a v-else :href="lecture.anc_link" class="button is-info is-small">Anc</a>
+                <a :href="lecture.edit" class="button is-info is-small">Edit</a>
             </td>
         </tr>
   </table>
@@ -35,6 +39,7 @@ export default {
     props: ['api'],
     data(){
         return {
+            moment: moment,
             lectures: [],
             filtered: [],
             search: '',

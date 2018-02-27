@@ -32,7 +32,17 @@
                         <span v-else class="tag is-danger">Offline</span>
                     </td>
                     <td><span class="tag ">{{device.type}}</span></td>
-                    <td>{{device.instructor ? device.instructor : '-'}}</td>
+                    <td :title="device.bio">
+                        <b-tooltip v-if="device.instructor" :label="device.bio"
+                            position="is-top">
+                            {{device.instructor}}
+                        </b-tooltip>
+                        <span v-else>
+                            -
+                        </span>
+                        
+                    
+                    </td>
                     <td>
                         <a class="button is-warning is-small" :href="'devices/' + device.id + '/edit'">Edit</a>
                         <a class="button is-danger is-small" @click.prevent="destroy(device.id)">Delete</a>
@@ -71,29 +81,33 @@ export default {
   },
   methods: {
     filter: function() {
-        this.filtered = this.devices
-            .filter(device => {
-            return device.room.toLowerCase().includes(this.search.toLowerCase())
-                || device.ip.toLowerCase().includes(this.search.toLowerCase());
-            });
+      this.filtered = this.devices.filter(device => {
+        return (
+          device.room.toLowerCase().includes(this.search.toLowerCase()) ||
+          device.ip.toLowerCase().includes(this.search.toLowerCase())
+        );
+      });
     },
-    destroy: function(id){
-        axios.delete('devices/' + id).then(response => {
-            this.$toast.open({
-                message: 'Device deleted.',
-                type: 'is-success'
-            });
-        }).catch(error => {
-            this.$toast.open({
-                message: 'Oops, Something went wrong !',
-                type: 'is-danger'
-            });
+    destroy: function(id) {
+      axios
+        .delete("devices/" + id)
+        .then(response => {
+          this.$toast.open({
+            message: "Device deleted.",
+            type: "is-success"
+          });
+        })
+        .catch(error => {
+          this.$toast.open({
+            message: "Oops, Something went wrong !",
+            type: "is-danger"
+          });
         });
 
-        this.devices = this.devices.filter(function(device){
-            return device.id != id;
-        });
-        this.filtered = this.devices;
+      this.devices = this.devices.filter(function(device) {
+        return device.id != id;
+      });
+      this.filtered = this.devices;
     }
   }
 };

@@ -15,14 +15,17 @@ Vue.use(Buefy);
 
 
 
+
+
 Vue.component('icon', require('./components/Icon.vue'));
 Vue.component('subheader', require('./components/Subheader.vue'));
 Vue.component('overview-table', require('./components/OverviewTable.vue'));
-Vue.component('device', require('./components/Device.vue'));
 Vue.component('devices', require('./components/Devices.vue'));
 Vue.component('create-device', require('./components/devices/create.vue'));
 Vue.component('edit-device', require('./components/devices/edit.vue'));
 Vue.component('lectures-table', require('./components/lecture/table.vue'));
+Vue.component('edit-lecture', require('./components/lecture/edit.vue'));
+Vue.component('create-announcement', require('./components/announcement/create.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

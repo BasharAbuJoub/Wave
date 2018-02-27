@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         update(){
-            console.log(this.device.id);
+
             axios.patch('/devices/' + this.device.id, {
                 room: this.room,
                 ip: this.ip, 

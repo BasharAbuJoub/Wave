@@ -11,8 +11,9 @@ University halls screens control system.
 Wave is a system that shows information about lectures in the university by using a small screen hanging on each hall door, 
 Helping the student to know what currently going in the hall.
 
-* The system was developed back in 2017
-* The system is currently used by Applied Scince University - Jordan 
+* The system was developed back in 2017 and rebuilt from scratch in 2018.
+* The system is currently used by Applied Scince University - Jordan
+* I am not the owner of the idea.
 
 ## Features
 * Current lecture information.

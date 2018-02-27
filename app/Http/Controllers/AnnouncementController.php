@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Lecture;
 
-class LectureController extends Controller
+class AnnouncementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,6 @@ class LectureController extends Controller
     public function index()
     {
         //
-
-        return view('lecture.index');
     }
 
     /**
@@ -27,6 +24,8 @@ class LectureController extends Controller
     public function create()
     {
         //
+
+        return view('announcement.create');
     }
 
     /**
@@ -60,9 +59,6 @@ class LectureController extends Controller
     public function edit($id)
     {
         //
-
-
-        return view('lecture.edit', ['lecture' => Lecture::find($id)]);
     }
 
     /**
@@ -75,26 +71,6 @@ class LectureController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        $this->validate($request, [
-            'office_id' => 'required|int',
-            'hall_id'   => 'required|int',
-            'start'  => 'required|date_format:H:i:s',
-            'end'  => 'required|date_format:H:i:s',
-            'course' => 'required',
-            'days'  => 'required|array'  
-        ]);
-
-        Lecture::find($id)->update([
-            'office_id' => $request->office_id,
-            'hall_id'      => $request->hall_id,
-            'start'     => $request->start,
-            'end'       => $request->end,
-            'course'    => $request->course,
-            'days'      => $request->days
-        ]);
-
-        return response('Updated', 200);
     }
 
     /**
