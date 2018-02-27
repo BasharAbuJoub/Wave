@@ -15,6 +15,8 @@ class LectureResource extends JsonResource
     public function toArray($request)
     {
         $anc = $this->getAnnouncement();
+        $anc_edit = $anc != null ? route('announcements.edit', ['id'=>$anc->id]) : '-';
+        $anc_msg = $anc != null ? $anc->getTypeTitle() . ' - ' . $anc->note : '-';
 
         return [
             'id'        => $this->id,
@@ -24,15 +26,11 @@ class LectureResource extends JsonResource
             'end'       => $this->end,
             'instructor'=> $this->instructor,
             'days'      => $this->days,
-            'announcement'       => $this->when($anc != null, function(){
-                return $anc->getTypeTitle() . ' - ' . $anc->note;
-            }),
             'edit'      => route('lectures.edit', ['id' => $this->id]),
             //////////////////////////////////////////////
-            'anc_link'      => $this->when($anc, function(){
-                return route('announcements.edit', ['id'=>$anc->id]);
-            }),
-            'anc_link'      => route('announcements.create'),
+            'announcement'       => $this->when($anc != null, $anc_msg),
+            'anc_link_edit'      => $this->when($anc != null, $anc_edit),
+            'anc_link'      => route('announcements.create.lecture', ['lecture' => $this->id]),
             ];
     }
 }

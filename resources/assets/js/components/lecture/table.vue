@@ -23,7 +23,11 @@
             <td>{{moment(lecture.end, 'HH:mm:ss').format('HH:mm')}}</td>
             <td><span v-for="day in lecture.days">{{moment().day(day).format('dd')}}. </span></td>
             <td>
-                <a v-if="lecture.announcement" :href="lecture.anc_link" class="button is-warning is-small">Anc</a>
+                <b-tooltip v-if="lecture.announcement" :label="lecture.announcement"
+                    position="is-top">
+                    <a  :href="lecture.anc_link_edit" class="button is-warning is-small">Anc</a>
+                </b-tooltip>
+                
                 <a v-else :href="lecture.anc_link" class="button is-info is-small">Anc</a>
                 <a :href="lecture.edit" class="button is-info is-small">Edit</a>
             </td>

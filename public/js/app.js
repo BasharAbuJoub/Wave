@@ -47772,6 +47772,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['api'],
@@ -47882,34 +47886,49 @@ var render = function() {
               })
             ),
             _vm._v(" "),
-            _c("td", [
-              lecture.announcement
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "button is-warning is-small",
-                      attrs: { href: lecture.anc_link }
-                    },
-                    [_vm._v("Anc")]
-                  )
-                : _c(
-                    "a",
-                    {
-                      staticClass: "button is-info is-small",
-                      attrs: { href: lecture.anc_link }
-                    },
-                    [_vm._v("Anc")]
-                  ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "button is-info is-small",
-                  attrs: { href: lecture.edit }
-                },
-                [_vm._v("Edit")]
-              )
-            ])
+            _c(
+              "td",
+              [
+                lecture.announcement
+                  ? _c(
+                      "b-tooltip",
+                      {
+                        attrs: {
+                          label: lecture.announcement,
+                          position: "is-top"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "button is-warning is-small",
+                            attrs: { href: lecture.anc_link_edit }
+                          },
+                          [_vm._v("Anc")]
+                        )
+                      ]
+                    )
+                  : _c(
+                      "a",
+                      {
+                        staticClass: "button is-info is-small",
+                        attrs: { href: lecture.anc_link }
+                      },
+                      [_vm._v("Anc")]
+                    ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "button is-info is-small",
+                    attrs: { href: lecture.edit }
+                  },
+                  [_vm._v("Edit")]
+                )
+              ],
+              1
+            )
           ])
         })
       ],
@@ -48132,12 +48151,12 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['lecture'],
     data: function data() {
         return {
             note: '',
             type: '0',
-            count: 1,
-            lecture: 0
+            count: 1
         };
     },
 
@@ -48145,22 +48164,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         create: function create() {
             var _this = this;
 
-            axios.post('/devices', {
-                room: this.room,
-                ip: this.ip,
+            axios.post('/announcements', {
+                note: this.note,
+                id: this.lecture.id,
                 type: this.type,
-                instructor: this.instructor,
-                bio: this.bio
+                count: this.count
             }).then(function (response) {
                 _this.$toast.open({
-                    message: 'Device successfully added',
+                    message: 'Announcement successfully added',
                     type: 'is-success'
                 });
-                _this.room = '';
-                _this.ip = '';
-                _this.type = '0';
-                _this.instructor = '';
-                _this.bio = '';
             }).catch(function (error) {
                 _this.$toast.open({
                     message: 'Please fill all required fields',

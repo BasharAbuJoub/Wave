@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lecture;
 
 class AnnouncementController extends Controller
 {
@@ -21,11 +22,11 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($lecture)
     {
         //
 
-        return view('announcement.create');
+        return view('announcement.create', ['lecture'=> Lecture::find($lecture)]);
     }
 
     /**
@@ -37,6 +38,15 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         //
+
+        //
+        $this->validate($request, [
+            'note' => 'required',
+            'type' => 'required|int',
+            'count'=> 'required|int',
+        ]);
+        Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
+        return response('Added', 200);
     }
 
     /**

@@ -6,6 +6,7 @@ Route::resource('/devices', 'DeviceController');
 
 Route::resource('/lectures', 'LectureController');
 
+Route::get('/announcements/create/{lecture}', 'AnnouncementController@create')->name('announcements.create.lecture');
 Route::resource('/announcements', 'AnnouncementController');
 
 Route::get('/logout', function(){

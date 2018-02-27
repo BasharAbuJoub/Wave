@@ -1,34 +1,28 @@
 <script>
 export default {
+  props: ['lecture'],
   data(){
       return {
           note: '',
           type: '0',
           count: 1,
-          lecture: 0,
       }
   },
   methods: {
       create(){
-          axios.post('/devices', 
+          axios.post('/announcements', 
             {
-                room: this.room, 
-                ip: this.ip,
+                note: this.note, 
+                id: this.lecture.id,
                 type: this.type,
-                instructor: this.instructor,
-                bio: this.bio
+                count: this.count,
             }
           )
             .then(response => {
                 this.$toast.open({
-                    message: 'Device successfully added',
+                    message: 'Announcement successfully added',
                     type: 'is-success'
                 });
-                this.room = '';
-                this.ip = '';
-                this.type = '0';
-                this.instructor = '';
-                this.bio = '';
             })
             .catch(error => {
                 this.$toast.open({

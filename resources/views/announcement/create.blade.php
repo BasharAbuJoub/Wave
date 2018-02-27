@@ -1,20 +1,13 @@
 @extends('layouts.control') 
 @section('side')
-<create-announcement inline-template>
+<create-announcement :lecture="{{$lecture}}" inline-template>
     <div class="columns">
         <div class="column is-6 is-offset-3">
             <div class="box">
+            <p>Lecture : @{{lecture.course}} - @{{lecture.instructor}} - @{{lecture.start}}</p>
+            <br>
+
                 <form action="{{route('announcements.store')}}" method="post">
-                    {{--  <b-field label="Lecture">
-                        <b-select placeholder="Select a lecture" v-model="lecture">
-                            <option
-                                v-for="office in offices"
-                                :value="office.id"
-                                >
-                                @{{ office.room }}
-                            </option>
-                        </b-select>
-                    </b-field>  --}}
                     <b-field>
                         <b-radio-button v-model="type" native-value="0" type="is-info">
                             <span>Cancel</span>
