@@ -9,6 +9,8 @@ use App\Hall;
 use App\Http\Resources\Overlay;
 use App\Device;
 use App\Http\Resources\OverviewCollection;
+use App\Http\Resources\LectureResource;
+use App\Lecture;
 
 class ApiController extends Controller
 {
@@ -25,6 +27,10 @@ class ApiController extends Controller
 
     public function overlays(){
         return new OverlayCollection(Device::all());
+    }
+
+    public function lectures(){
+        return LectureResource::collection(Lecture::all());
     }
 
 }

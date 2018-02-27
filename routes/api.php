@@ -29,3 +29,5 @@ Route::get('/devices/status', function(){
 Route::get('/devices', function(){
     return DeviceResource::collection(Device::all());
 });
+
+Route::get('/lectures', 'API\ApiController@lectures')->name('api.lectures');

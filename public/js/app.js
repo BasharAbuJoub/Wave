@@ -1139,7 +1139,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(57);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
@@ -1172,6 +1172,7 @@ Vue.component('device', __webpack_require__(47));
 Vue.component('devices', __webpack_require__(50));
 Vue.component('create-device', __webpack_require__(53));
 Vue.component('edit-device', __webpack_require__(55));
+Vue.component('lectures-table', __webpack_require__(57));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31412,6 +31413,223 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\lecture\\table.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f4e0b3ae", Component.options)
+  } else {
+    hotAPI.reload("data-v-f4e0b3ae", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['api'],
+    data: function data() {
+        return {
+            lectures: [],
+            filtered: [],
+            search: ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get(this.api).then(function (response) {
+            _this.lectures = response.data.data;
+            _this.filtered = _this.lectures;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    methods: {
+        filter: function filter() {
+            this.filtered = this.lectures.filter(function (lecture) {
+                return lecture.contains;
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "box" }, [
+    _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "field column is-6" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
+            }
+          ],
+          staticClass: "input",
+          attrs: { type: "text", placeholder: "Search course/instructor/hall" },
+          domProps: { value: _vm.search },
+          on: {
+            keyup: _vm.filter,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table is-fullwidth" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.filtered, function(lecture) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(lecture.course))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(lecture.hall))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(lecture.instructor))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(lecture.start))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(lecture.end))]),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Course")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Hall")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Instructor")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Start")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("End")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Action")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { staticClass: "button is-info", attrs: { href: "#" } }, [
+        _vm._v("Anc")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f4e0b3ae", module.exports)
+  }
+}
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
