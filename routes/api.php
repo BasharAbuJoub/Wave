@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use App\Device;
 use App\Office;
 use App\Hall;
+use App\Broadcast;
 use App\Http\Resources\DeviceResource;
 use App\Http\Resources\HallResource;
 use App\Http\Resources\OfficeResource;
+use App\Http\Resources\BroadcastResourse;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,10 @@ Route::get('/overview', 'API\ApiController@overview');
 Route::get('/devices/status', function(){
     return ['online' => [1,2,3,4], 'offline' => [5,6,7]];
 });
+
+Route::get('/broadcasts', function(){
+    return BroadcastResourse::collection(Broadcast::all());
+})->name('api.broadcasts');
 
 Route::get('/halls', function(){
     return HallResource::collection(Hall::all());

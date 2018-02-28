@@ -1,5 +1,5 @@
-
 @extends('layouts.app') 
+
 @section('content')
 <div class="container is-fluid" style="margin-top: 50px;">
     <div class="columns">
@@ -23,7 +23,7 @@
                         <a href="{{route('lectures.index')}}" class="{{Active::route('lectures.*')}} {{Active::route('announcements.*')}}"><icon name="ion-ios-calendar-outline" class="m-icon" size="24"></icon>Lectures</a>
                         </li>
                         <li>
-                        <a href="{{route('devices.index')}}" ><icon name="ion-ios-mic-outline" class="m-icon" size="24"></icon>Broadcast</a>
+                        <a href="{{route('broadcasts.index')}}" class="{{Active::route('broadcasts.*')}}" ><icon name="ion-ios-mic-outline" class="m-icon" size="24"></icon>Broadcast</a>
                         </li>
                     </ul>
                     <p class="menu-label">

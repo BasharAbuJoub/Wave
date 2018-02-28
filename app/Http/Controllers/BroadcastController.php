@@ -14,6 +14,7 @@ class BroadcastController extends Controller
     public function index()
     {
         //
+        return view('broadcast.index', ['create' => route('broadcasts.create'), 'api' => route('api.broadcasts')]);
     }
 
     /**
