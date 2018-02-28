@@ -25,7 +25,7 @@
             <td>
                 <b-tooltip v-if="lecture.announcement" :label="lecture.announcement"
                     position="is-top">
-                    <a  :href="lecture.anc_link_edit" class="button is-warning is-small">Anc</a>
+                    <a  :href="lecture.anc_link_edit" class="button is-danger is-small" >Anc</a>
                 </b-tooltip>
                 
                 <a v-else :href="lecture.anc_link" class="button is-info is-small">Anc</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lecture;
+use App\Announcement;
 
 class AnnouncementController extends Controller
 {
@@ -45,8 +46,8 @@ class AnnouncementController extends Controller
             'type' => 'required|int',
             'count'=> 'required|int',
         ]);
-        Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
-        return response('Added', 200);
+        $anc = Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
+        return response($anc, 200);
     }
 
     /**
@@ -69,6 +70,11 @@ class AnnouncementController extends Controller
     public function edit($id)
     {
         //
+    
+        return View('announcement.edit', [
+            'anc' => Announcement::find($id),
+            'lecture' => Announcement::find($id)->lecture,
+        ]);
     }
 
     /**
@@ -81,6 +87,16 @@ class AnnouncementController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'note' => 'required',
+            'type' => 'required|boolean',
+        ]);
+
+        Announcement::find($id)->update([
+            'note' => $request->note,
+            'type' => $request->type,
+        ]);
+        return response('Updated', 200);
     }
 
     /**
@@ -92,5 +108,7 @@ class AnnouncementController extends Controller
     public function destroy($id)
     {
         //
+        Announcement::find($id)->delete();
+        return response(route('lectures.index'), 200);
     }
 }

@@ -18,7 +18,7 @@
                     </b-field>
                     <div class="field">
                         <label class="label">Lectures</label>
-                        <input class="input" type="number" placeholder="0">
+                        <input class="input" type="number" placeholder="0" v-model="count">
                     </div>
                     <div class="field">
                         <label class="label">Note</label>

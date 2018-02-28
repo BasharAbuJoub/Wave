@@ -74,6 +74,7 @@ class Lecture extends Model
 
         $end =  Carbon::parse($this->end)->addDays($sum);
         $anc = $this->announcements()->create(['type' => $type, 'note' => $note, 'until' => $end]);
+        return $anc;
         //dispatch(new AnnouncementDeleteJob($anc))->delay($end);
     }
 

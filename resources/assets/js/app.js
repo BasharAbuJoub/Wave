@@ -26,6 +26,7 @@ Vue.component('edit-device', require('./components/devices/edit.vue'));
 Vue.component('lectures-table', require('./components/lecture/table.vue'));
 Vue.component('edit-lecture', require('./components/lecture/edit.vue'));
 Vue.component('create-announcement', require('./components/announcement/create.vue'));
+Vue.component('edit-announcement', require('./components/announcement/edit.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
