@@ -21,6 +21,7 @@ class BroadcastResourse extends JsonResource
             
 
         return [
+            'id'        => $this->id,
             'devices'   => $devices,
             'line1'     => $this->line1,
             'line2'     => $this->line2,

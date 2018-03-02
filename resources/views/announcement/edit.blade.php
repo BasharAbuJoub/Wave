@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>Instructor:</td>
-                        <td>{{$lecture->instructor}}</td>
+                        <td>{{$lecture->office->instructor}}</td>
                     </tr>
                     <tr>
                         <td>Anc End :</td>

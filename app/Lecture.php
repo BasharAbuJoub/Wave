@@ -10,7 +10,7 @@ class Lecture extends Model
 {
 
     protected $fillable = [
-        'course', 'instructor', 'start', 'end', 'office_id', 'hall_id', 'days'
+        'course', 'start', 'end', 'office_id', 'hall_id', 'days'
     ];
 
     protected $casts = [

@@ -1,6 +1,5 @@
 <script>
 export default {
-    props: ['lecture'],
     data(){
         return {
             hall: '',
@@ -16,16 +15,10 @@ export default {
     mounted(){
         axios.get('/api/offices').then(response => this.offices = response.data.data);
         axios.get('/api/halls').then(response => this.halls = response.data.data);
-        this.hall = this.lecture.hall_id;
-        this.office = this.lecture.office_id;
-        this.course = this.lecture.course;
-        this.start = moment(this.lecture.start, 'HH:mm:ss').toDate();
-        this.end = moment(this.lecture.end, 'HH:mm:ss').toDate();
-        this.days = this.lecture.days;
     },
     methods: {
-        update(){
-            axios.patch('/lectures/' + this.lecture.id, {
+        create(){
+            axios.post('/lectures', {
                 hall_id: this.hall,
                 office_id: this.office, 
                 course: this.course,
@@ -33,10 +26,7 @@ export default {
                 end: moment(this.end).format('HH:mm:ss'),
                 days: this.days
             }).then(response => {
-                this.$toast.open({
-                    message: 'Lecture updated.',
-                    type: 'is-success'
-                });
+                window.location = response.data;
             }).catch(error => {
                 this.$toast.open({
                     message: 'Oops, Something went wrong !',

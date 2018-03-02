@@ -9,6 +9,7 @@ use App\Http\Resources\DeviceResource;
 use App\Http\Resources\HallResource;
 use App\Http\Resources\OfficeResource;
 use App\Http\Resources\BroadcastResourse;
+use App\Http\Resources\Overlay;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/overview', 'API\ApiController@overview');
+Route::get('/overlays', function(){
+    return Overlay::collection(Device::all());
+});
 
 Route::get('/devices/status', function(){
     return ['online' => [1,2,3,4], 'offline' => [5,6,7]];

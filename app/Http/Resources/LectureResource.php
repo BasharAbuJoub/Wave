@@ -24,7 +24,7 @@ class LectureResource extends JsonResource
             'course'    => $this->course,
             'start'     => $this->start,
             'end'       => $this->end,
-            'instructor'=> $this->instructor,
+            'instructor'=> $this->office->instructor,
             'days'      => $this->days,
             'edit'      => route('lectures.edit', ['id' => $this->id]),
             //////////////////////////////////////////////

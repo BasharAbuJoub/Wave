@@ -3,7 +3,7 @@
         <device v-for="device in devices" :device="device"></device>
     </div> -->
     <div>
-        <div class="box">
+        <div class="box" style="overflow-x: auto;">
             <div class="columns">
                 <div class="column is-6">
                     <div class="field">
@@ -44,8 +44,12 @@
                     
                     </td>
                     <td>
-                        <a class="button is-warning is-small" :href="'devices/' + device.id + '/edit'">Edit</a>
-                        <a class="button is-danger is-small" @click.prevent="destroy(device.id)">Delete</a>
+                        <a title="Edit" class="button is-info is-small" :href="'devices/' + device.id + '/edit'">
+                          <icon name="ion-ios-gear" size="18" large></icon>
+                        </a>
+                        <a title="Delete" class="button is-danger is-small" @click.prevent="destroy(device.id)">
+                          <icon name="ion-close-round" size="18"></icon>
+                        </a>
                     </td>
                 </tr>
             </table>

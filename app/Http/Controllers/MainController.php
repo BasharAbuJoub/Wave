@@ -17,4 +17,12 @@ class MainController extends Controller
     public function index(){
         return view('pages.overview');
     }
+
+    public function lobby(){
+        return view('pages.lobby');
+    }
+
+    public function settings(){
+        return view('pages.settings');
+    }
 }

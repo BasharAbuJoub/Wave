@@ -34,7 +34,6 @@ $factory->define(Device::class, function (Faker $faker){
 $factory->define(Lecture::class, function (Faker $faker){
     return [
         'course'    => $faker->word . ' course',
-        'instructor'=> 'Dr.' . $faker->firstNameMale . ' ' . $faker->lastName,
         'start'     => Carbon::now()->addMinutes(rand(0, 10))->toTimeString(),
         'end'       => Carbon::now()->addMinutes(rand(30, 120))->toTimeString(),
         'office_id' => factory(Office::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,

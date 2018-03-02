@@ -35,7 +35,7 @@ class Overview extends JsonResource
             return [
                 'hall'      => $device->room,
                 'status'    => $anc->getTypeTitle(),
-                'info'      => $anc->note,
+                'info'      => $lecture->course . ' - NOTE:' . $anc->note,
                 'start'     => $lecture->start,
                 'end'       => $lecture->end,
             ];

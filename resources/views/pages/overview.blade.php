@@ -1,25 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.control')
 
-@section('content')
-
-    <subheader icon="ion-ios-analytics-outline"
-        title="Welcome to Wave"
-        body="Faculty of information technology LCD control system"
-        ></subheader>
+@section('side')
 
 
-
-    <div class="container is-fluid">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">
-                Overview
-                </p>
-            </header>
-            <div class="card-content">
+        <div class="box">
                 <overview-table></overview-table>
-            </div>
         </div>
-    </div>
     
 @endsection

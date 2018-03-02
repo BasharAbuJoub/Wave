@@ -28,6 +28,9 @@ Vue.component('edit-lecture', require('./components/lecture/edit.vue'));
 Vue.component('create-announcement', require('./components/announcement/create.vue'));
 Vue.component('edit-announcement', require('./components/announcement/edit.vue'));
 Vue.component('broadcast-table', require('./components/broadcast/index.vue'));
+Vue.component('create-lecture', require('./components/lecture/create.vue'));
+Vue.component('create-broadcast', require('./components/broadcast/create.vue'));
+Vue.component('edit-broadcast', require('./components/broadcast/edit.vue'));
 
 
 /**

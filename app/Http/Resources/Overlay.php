@@ -56,7 +56,7 @@ class Overlay extends JsonResource
             }elseif($anc != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $lecture->course . ' - ' . $lecture->instructor,
+                    'line1' => $lecture->course . ' - ' . $lecture->office->instructor,
                     'line2' => $anc->getTypeTitle() . ' - ' . $anc->note
                 ];
             }elseif($lecture != null){

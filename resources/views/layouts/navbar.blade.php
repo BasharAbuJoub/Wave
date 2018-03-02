@@ -15,16 +15,16 @@
         </div>
         <div id="navbarMenuHeroB" class="navbar-menu">
         <div class="navbar-end">
-            <a class="navbar-item is-active">
-                Overview
-            </a>
+            {{--  <a class="navbar-item is-active">
+                Home
+            </a>  --}}
             
 
 
             @auth
             
                 {{--  DROPDOWN  --}}
-                <div class="navbar-item has-dropdown is-hoverable">
+                {{--  <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         Control
                     </a>
@@ -54,7 +54,7 @@
                         </a>
     
                     </div>
-                </div>
+                </div>  --}}
 
                 {{--  DROPDOWN  --}}
                 <div class="navbar-item has-dropdown is-hoverable">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Broadcast;
 use Illuminate\Http\Request;
 
 class BroadcastController extends Controller
@@ -14,7 +15,7 @@ class BroadcastController extends Controller
     public function index()
     {
         //
-        return view('broadcast.index', ['create' => route('broadcasts.create'), 'api' => route('api.broadcasts')]);
+        return view('broadcast.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class BroadcastController extends Controller
      */
     public function create()
     {
-        //
+        return view('broadcast.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class BroadcastController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'line1'     => 'required',
+            'line2'     => 'required',
+            'start'     => 'required|date_format:H:i:s',    
+            'end'       => 'required|date_format:H:i:s',
+            'devices'   => 'required|array',    
+        ]);
+
+        Broadcast::create($request->all());
+
+        return route('broadcasts.index');
     }
 
     /**
@@ -57,7 +68,9 @@ class BroadcastController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('broadcast.edit', ['broadcast' => Broadcast::find($id)]);
+        
     }
 
     /**
@@ -69,7 +82,17 @@ class BroadcastController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'line1'     => 'required',
+            'line2'     => 'required',
+            'start'     => 'required|date_format:H:i:s',    
+            'end'       => 'required|date_format:H:i:s',
+            'devices'   => 'required|array',    
+        ]);
+
+        Broadcast::find($id)->update($request->all());
+
+        return response('Updated');
     }
 
     /**
@@ -80,6 +103,7 @@ class BroadcastController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Broadcast::find($id)->delete();
+        return response('Destroyed');
     }
 }

@@ -16,7 +16,6 @@ class CreateLecturesTable extends Migration
         Schema::create('lectures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('course');
-            $table->string('instructor');
             $table->unsignedInteger('hall_id');
             $table->unsignedInteger('office_id');
             $table->time('start');

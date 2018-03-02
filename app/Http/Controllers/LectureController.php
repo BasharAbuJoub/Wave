@@ -27,6 +27,7 @@ class LectureController extends Controller
     public function create()
     {
         //
+        return view('lecture.create');
     }
 
     /**
@@ -38,6 +39,18 @@ class LectureController extends Controller
     public function store(Request $request)
     {
 
+        $this->validate($request, [
+            'course'    => 'required',
+            'hall_id'   => 'required|exists:halls,id',
+            'office_id'   => 'required|exists:offices,id',
+            'start'     => 'required|date_format:H:i:s',
+            'end'       => 'required|date_format:H:i:s',
+            'days'      => 'required|array'
+
+        ]);
+
+        Lecture::create($request->all());
+        return response(route('lectures.index'));
     }
 
     /**
@@ -106,5 +119,9 @@ class LectureController extends Controller
     public function destroy($id)
     {
         //
+    
+        Lecture::find($id)->delete();
+        return response('Destroyed');
     }
+
 }
