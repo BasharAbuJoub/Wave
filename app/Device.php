@@ -20,7 +20,7 @@ class Device extends Model
 
     public function getBroadcast(){
         return Broadcast::latest()->get()->filter(function ($broadcast, $key){
-            return $broadcast->isActive() && $broadcast->hasDevice($this->id);
+            return $broadcast->isActive() && $broadcast->hasDevice($this->deviceable->id);
         })->first();
     }
 

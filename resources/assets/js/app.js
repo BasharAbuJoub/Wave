@@ -31,6 +31,8 @@ Vue.component('broadcast-table', require('./components/broadcast/index.vue'));
 Vue.component('create-lecture', require('./components/lecture/create.vue'));
 Vue.component('create-broadcast', require('./components/broadcast/create.vue'));
 Vue.component('edit-broadcast', require('./components/broadcast/edit.vue'));
+Vue.component('settings', require('./components/settings/index.vue'));
+Vue.component('devices-modal', require('./components/devices-modal.vue'));
 
 
 /**

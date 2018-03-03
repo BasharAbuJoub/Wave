@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-use App\Device;
+use App\Hall;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BroadcastResourse extends JsonResource
@@ -17,7 +17,7 @@ class BroadcastResourse extends JsonResource
 
         $devices = array();
         foreach($this->devices as $id)
-            array_push($devices, ['id' => $id, 'room' => Device::find($id)->room]);
+            array_push($devices, ['id' => $id, 'room' => Hall::find($id)->device->room]);
             
 
         return [

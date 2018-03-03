@@ -68,7 +68,9 @@ export default {
     methods:{
         filter(){
             this.filtered = this.lectures.filter(lecture => {
-                return lecture.contains
+                return lecture.course.toLowerCase().includes(this.search.toLowerCase()) ||
+                    lecture.hall.toLowerCase().includes(this.search.toLowerCase()) ||
+                    lecture.instructor.toLowerCase().includes(this.search.toLowerCase());
             });
         },
         remove(id){

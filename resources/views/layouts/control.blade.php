@@ -19,7 +19,7 @@ body="Faculty of information technology LCD control system"
                     <ul class="menu-list">
                     <li><a href="{{url('/')}}" class="{{Active::route('home')}}"><icon name="ion-ios-analytics-outline" class="m-icon" size="24"></icon>Overview</a></li>
                     <li><a href="{{route('lobby')}}" class="{{Active::route('lobby')}}"><icon name="ion-ios-world-outline" class="m-icon" size="24"></icon>Lobby</a></li>
-                    <li><a href="{{route('settings')}}" class="{{Active::route('settings')}}"><icon name="ion-ios-gear-outline" class="m-icon" size="24"></icon>Settings</a></li>
+                    <li><a href="{{route('settings.index')}}" class="{{Active::route('settings.index')}}"><icon name="ion-ios-gear-outline" class="m-icon" size="24"></icon>Settings</a></li>
                     </ul>
                     <p class="menu-label">
                         Data
