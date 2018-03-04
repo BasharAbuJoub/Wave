@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('admin')->default(0);
+            $table->boolean('role')->default(0); // 0: Normal, 1:Instructor, 2: still , 3: Admin
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             'name'      => 'Super Admin',
             'email'     => 'admin@admin.com',
             'password'  => bcrypt('admin'),
-            'admin'     => 1,
+            'role'     => 3,
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now()
         ]);
