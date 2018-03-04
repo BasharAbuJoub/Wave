@@ -21,8 +21,8 @@ class DeviceResource extends JsonResource
             'room'  => $this->room,
             'ip'    => $this->ip,
             'type'  => $type == 0 ? 'Hall' : 'Office',
-            'instructor'   => $this->when($type == 1, $this->deviceable->instructor),  
-            'bio'   => $this->when($type == 1, $this->deviceable->bio),
+            'instructor'   => $this->when($type == 1, $this->deviceable->instructor->name),  
+            'bio'   => $this->when($type == 1, $this->deviceable->instructor->bio),
         ];
 
     }

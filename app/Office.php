@@ -9,10 +9,6 @@ class Office extends Model
     //
     public $timestamps = false;
 
-    protected $fillable = [
-        'instructor', 'bio'
-    ];
-
     public function device(){
         return $this->morphOne(Device::class, 'deviceable');
     }
@@ -22,5 +18,8 @@ class Office extends Model
         return $this->hasMany(Lecture::class);
     }
 
+    public function instructor(){
+        return $this->belongsTo(User::class);
+    }
 
 }

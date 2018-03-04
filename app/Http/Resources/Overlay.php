@@ -27,20 +27,20 @@ class Overlay extends JsonResource
             if($anc != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $this->deviceable->instructor,
+                    'line1' => $this->deviceable->instructor->name,
                     'line2' => $anc->getTypeTitle() . ' - ' . $lecture->course
                 ];
             }elseif($lecture != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $this->deviceable->instructor,
+                    'line1' => $this->deviceable->instructor->name,
                     'line2' => $lecture->course
                 ];
             }else{
                 return [
                     'title' => $this->room,
-                    'line1' => $this->deviceable->instructor,
-                    'line2' => $this->deviceable->bio != null ? $this->deviceable->bio : ''
+                    'line1' => $this->deviceable->instructor->name,
+                    'line2' => $this->deviceable->instructor->bio != null ? $this->deviceable->instructor->bio : ''
                 ];
             }
         }
@@ -56,20 +56,20 @@ class Overlay extends JsonResource
             }elseif($anc != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $lecture->course . ' - ' . $lecture->office->instructor,
+                    'line1' => $lecture->course . ' - ' . $lecture->office->instructor->name,
                     'line2' => $anc->getTypeTitle() . ' - ' . $anc->note
                 ];
             }elseif($lecture != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $lecture->course . ' - ' . $lecture->instructor,
+                    'line1' => $lecture->course . ' - ' . $lecture->instructor->name,
                     'line2' => gmdate('H:i', $lecture->end()->diffInSeconds(Carbon::now())) . ' left.'
                 ];
             }elseif($next != null){
                 return [
                     'title' => $this->room,
                     'line1' => 'Next lecture start ' . $next->start()->format('H:i'),
-                    'line2' => $next->course . ' - ' . $next->instructor
+                    'line2' => $next->course . ' - ' . $next->instructor->name
                 ];
             }else{
                 return[
