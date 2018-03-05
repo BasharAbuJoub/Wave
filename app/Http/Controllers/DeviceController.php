@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Device;
 use App\Office;
 use App\Hall;
+use App\User;
 
 class DeviceController extends Controller
 {
@@ -48,7 +49,7 @@ class DeviceController extends Controller
         ]);
         if($request->type == '1'){
             $this->validate($request, [
-                'instructor' => 'required'
+                'user_id' => 'required|unique:offices|exists:users,id'
             ]);
         }
 
@@ -58,13 +59,17 @@ class DeviceController extends Controller
                 'ip'   => $request->ip,
             ]);
         }else{
-            Office::create([
-                'instructor'    => $request->instructor,
-                'bio'           => $request->bio != null ? $request->bio : ''
-            ])->device()->create([
+            User::find($request->user_id)->office()->create()->device()->create([
                 'room' => $request->room,
                 'ip'   => $request->ip,
             ]);
+            // Office::create([
+            //     'instructor'    => $request->instructor,
+            //     'bio'           => $request->bio != null ? $request->bio : ''
+            // ])->device()->create([
+            //     'room' => $request->room,
+            //     'ip'   => $request->ip,
+            // ]);
         }
 
         return 'Device created';

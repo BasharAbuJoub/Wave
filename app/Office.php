@@ -19,7 +19,7 @@ class Office extends Model
     }
 
     public function instructor(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }

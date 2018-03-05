@@ -10,6 +10,8 @@ use App\Http\Resources\HallResource;
 use App\Http\Resources\OfficeResource;
 use App\Http\Resources\BroadcastResourse;
 use App\Http\Resources\Overlay;
+use App\Http\Resources\UserResourse;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,10 @@ Route::get('/devices/status', function(){
 Route::get('/broadcasts', function(){
     return BroadcastResourse::collection(Broadcast::all());
 })->name('api.broadcasts');
+
+Route::get('/users', function(){
+    return UserResourse::collection(User::all());
+});
 
 Route::get('/halls', function(){
     return HallResource::collection(Hall::all());

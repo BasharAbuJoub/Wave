@@ -33,6 +33,9 @@ Vue.component('create-broadcast', require('./components/broadcast/create.vue'));
 Vue.component('edit-broadcast', require('./components/broadcast/edit.vue'));
 Vue.component('settings', require('./components/settings/index.vue'));
 Vue.component('devices-modal', require('./components/devices-modal.vue'));
+Vue.component('register-form', require('./components/auth/register.vue'))
+Vue.component('edit-profile', require('./components/profile/edit.vue'));
+
 
 
 /**

@@ -2,6 +2,12 @@
 
 Route::get('/' , 'MainController@index')->name('home');
 
+Route::prefix('/profile')->middleware('auth')->group(function(){
+    Route::get('/', 'ProfileController@edit');
+
+    Route::put('/', 'ProfileController@update');
+});
+
 Route::resource('/devices', 'DeviceController');
 
 Route::resource('/lectures', 'LectureController');

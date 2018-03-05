@@ -2,12 +2,22 @@
 export default {
   data(){
       return {
+          users: [],
           room: '',
           ip: '',
           type: '0',
-          instructor: '',
-          bio: '',
+          user_id: '',
       }
+  },
+  mounted(){
+      axios.get('/api/users').then(reponse => {
+            this.users = reponse.data.data;
+      }).catch(error => {
+            this.$toast.open({
+                message: 'Could not load users',
+                type: 'is-danger'
+            });
+      });
   },
   methods: {
       create(){
@@ -16,8 +26,7 @@ export default {
                 room: this.room, 
                 ip: this.ip,
                 type: this.type,
-                instructor: this.instructor,
-                bio: this.bio
+                user_id: this.user_id
             }
           )
             .then(response => {
@@ -28,8 +37,7 @@ export default {
                 this.room = '';
                 this.ip = '';
                 this.type = '0';
-                this.instructor = '';
-                this.bio = '';
+                this.user_id = '';
             })
             .catch(error => {
                 this.$toast.open({
