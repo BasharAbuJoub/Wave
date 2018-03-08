@@ -6,27 +6,33 @@ export default {
             room: '',
             ip: '',
             type: '0',
-            instructor: '',
-            bio: '',
-    
+            user_id: '',
+            users: []    
         }
     },
     mounted(){
         this.room = this.device.room;
         this.ip = this.device.ip;
         this.type = this.device.deviceable_type == 'App\\Hall' ? '0' : '1';
-        this.instructor = this.device.deviceable.instructor;
-        this.bio = this.device.deviceable.bio;
+        this.user_id = this.device.deviceable.user_id;
+
+        axios.get('/api/users').then((response=> {
+            this.users = response.data.data;
+        })).catch(error => {
+            this.$toast.open({
+                message: 'Error loading users.',
+                type: 'is-danger'
+            });
+        });
 
     },
     methods: {
         update(){
 
-            axios.patch('/devices/' + this.device.id, {
+            axios.put('/devices/' + this.device.id, {
                 room: this.room,
                 ip: this.ip, 
-                instructor: this.instructor,
-                bio: this.bio,
+                user_id: this.user_id,
             }).then(response => {
                 this.$toast.open({
                     message: 'Device updated.',

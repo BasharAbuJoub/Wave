@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('role')->default(0); // 0: Normal, 1:Instructor, 2: still , 3: Admin
             $table->string('bio')->default('');
+            $table->unsignedInteger('uid');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class OfficeResource extends JsonResource
         return [
             'id' => $this->id,
             'room'  => $this->device->room,
+            'instructor' => $this->instructor->name,
         ];
 
     }

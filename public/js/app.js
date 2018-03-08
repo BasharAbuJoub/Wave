@@ -17370,7 +17370,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(133);
-module.exports = __webpack_require__(199);
+module.exports = __webpack_require__(201);
 
 
 /***/ }),
@@ -17413,7 +17413,7 @@ Vue.component('edit-broadcast', __webpack_require__(190));
 Vue.component('settings', __webpack_require__(192));
 Vue.component('devices-modal', __webpack_require__(194));
 Vue.component('register-form', __webpack_require__(197));
-Vue.component('edit-profile', __webpack_require__(210));
+Vue.component('edit-profile', __webpack_require__(199));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47683,35 +47683,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             room: '',
             ip: '',
             type: '0',
-            instructor: '',
-            bio: ''
-
+            user_id: '',
+            users: []
         };
     },
     mounted: function mounted() {
+        var _this = this;
+
         this.room = this.device.room;
         this.ip = this.device.ip;
         this.type = this.device.deviceable_type == 'App\\Hall' ? '0' : '1';
-        this.instructor = this.device.deviceable.instructor;
-        this.bio = this.device.deviceable.bio;
+        this.user_id = this.device.deviceable.user_id;
+
+        axios.get('/api/users').then(function (response) {
+            _this.users = response.data.data;
+        }).catch(function (error) {
+            _this.$toast.open({
+                message: 'Error loading users.',
+                type: 'is-danger'
+            });
+        });
     },
 
     methods: {
         update: function update() {
-            var _this = this;
+            var _this2 = this;
 
-            axios.patch('/devices/' + this.device.id, {
+            axios.put('/devices/' + this.device.id, {
                 room: this.room,
                 ip: this.ip,
-                instructor: this.instructor,
-                bio: this.bio
+                user_id: this.user_id
             }).then(function (response) {
-                _this.$toast.open({
+                _this2.$toast.open({
                     message: 'Device updated.',
                     type: 'is-success'
                 });
             }).catch(function (error) {
-                _this.$toast.open({
+                _this2.$toast.open({
                     message: 'Oops, Something went wrong !',
                     type: 'is-danger'
                 });
@@ -49139,28 +49147,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 199 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(211)
+var __vue_script__ = __webpack_require__(200)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -49201,7 +49193,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 211 */
+/* 200 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49243,6 +49235,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

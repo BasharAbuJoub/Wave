@@ -63,13 +63,6 @@ class DeviceController extends Controller
                 'room' => $request->room,
                 'ip'   => $request->ip,
             ]);
-            // Office::create([
-            //     'instructor'    => $request->instructor,
-            //     'bio'           => $request->bio != null ? $request->bio : ''
-            // ])->device()->create([
-            //     'room' => $request->room,
-            //     'ip'   => $request->ip,
-            // ]);
         }
 
         return 'Device created';
@@ -114,23 +107,24 @@ class DeviceController extends Controller
             'room'  => 'required',
             'ip'    => 'required|ipv4',
         ]);
-        if($request->type == '1'){
+        if($device->deviceable_type == 'App\Office'){
             $this->validate($request, [
-                'instructor' => 'required'
+                'user_id' => 'required|exists:users,id'
             ]);
         }
     
 
+
         $device->update([
             'room' => $request->room,
-            'ip'   => $request->ip
+            'ip'   => $request->ip,
         ]);
-        if($device->deviceable_type != 'App\Hall'){
+        if($device->deviceable_type == 'App\Office'){
             $device->deviceable->update([
-                'instructor' => $request->instructor,
-                'bio'        => $request->bio
+                'user_id' => $request->user_id,
             ]);
         }
+
 
         return response('Updated', 200);
     }

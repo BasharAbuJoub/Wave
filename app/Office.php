@@ -9,6 +9,10 @@ class Office extends Model
     //
     public $timestamps = false;
 
+    protected $fillable = [
+        'user_id'
+    ];
+
     public function device(){
         return $this->morphOne(Device::class, 'deviceable');
     }

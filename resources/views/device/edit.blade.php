@@ -14,14 +14,19 @@
                         <input type="text" class="input" v-model="ip" placeholder="IP" required>
                     </div>
                     <div v-show="type == '1'" class="field">
-                        <div class="field">
-                            <label class="label">Instructor</label>
-                            <input type="text" class="input" v-model="instructor" placeholder="Instructor name">
-                        </div>
-                        <div class="field">
-                            <label class="label">Bio (optional)</label>
-                            <input type="text" class="input" v-model="bio" placeholder="Biology">
-                        </div>
+
+                        <b-field label="Instructor">
+                            <b-select placeholder="Select an instructor"  v-model="user_id">
+                                <option 
+                                    v-for="user in users"
+                                    :value="user.id"
+                                    >
+                                    @{{ user.name }}
+                                </option>
+                            </b-select>
+                        </b-field>
+
+
                     </div>
                     <div class="field">
                         <input type="submit" class="button is-success" value="Save" @click.prevent="update">

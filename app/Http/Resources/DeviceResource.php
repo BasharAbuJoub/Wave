@@ -16,14 +16,23 @@ class DeviceResource extends JsonResource
     {
 
         $type = $this->deviceable_type == 'App\Office' ? 1 : 0;
-        return [
-            'id' => $this->id,
-            'room'  => $this->room,
-            'ip'    => $this->ip,
-            'type'  => $type == 0 ? 'Hall' : 'Office',
-            'instructor'   => $this->when($type == 1, $this->deviceable->instructor->name),  
-            'bio'   => $this->when($type == 1, $this->deviceable->instructor->bio),
-        ];
+
+        if($type == 0){
+            return [
+                'id' => $this->id,
+                'room'  => $this->room,
+                'ip'    => $this->ip,
+                'type'  => $type == 0 ? 'Hall' : 'Office',
+            ];
+        }else{
+            return [
+                'id' => $this->id,
+                'room'  => $this->room,
+                'ip'    => $this->ip,
+                'type'  => $type == 0 ? 'Hall' : 'Office',
+                'instructor'   => $this->when($type == 1, $this->deviceable->instructor->name),
+            ];
+        }
 
     }
 }

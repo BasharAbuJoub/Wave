@@ -61,13 +61,13 @@
                             </b-field>
                         </div>
                         <div class="column">
-                            <b-field label="Office">
-                                <b-select placeholder="Select an office" v-model="office">
+                            <b-field label="Instructor">
+                                <b-select placeholder="Select instructor" v-model="office">
                                     <option
                                         v-for="office in offices"
                                         :value="office.id"
                                         >
-                                        @{{ office.room }}
+                                        @{{ office.instructor }}
                                     </option>
                                 </b-select>
                             </b-field>
