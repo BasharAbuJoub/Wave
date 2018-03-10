@@ -17,7 +17,7 @@ class CreateLecturesTable extends Migration
             $table->increments('id');
             $table->string('course');
             $table->unsignedInteger('hall_id');
-            $table->unsignedInteger('office_id');
+            $table->unsignedInteger('user_id');
             $table->time('start');
             $table->time('end');
             $table->json('days');

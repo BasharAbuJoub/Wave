@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Resources\LectureResource;
+use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     //
 
     public function __construct()
     {  
-        return $this->middleware(['auth', 'admin']); 
+        return $this->middleware(['auth']); 
     }
 
     
@@ -22,7 +23,5 @@ class MainController extends Controller
         return view('pages.lobby');
     }
 
-    public function settings(){
-        return view('pages.settings');
-    }
+
 }

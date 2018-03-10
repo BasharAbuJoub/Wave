@@ -15,7 +15,7 @@ class Overlay extends JsonResource
      * @return array
      */
     public function toArray($request){
-        
+        $this->withoutWrapping();
         $broadcast = $this->getBroadcast();
         $lecture = $this->getCurrentLecture();
         $anc = $lecture != null ? $lecture->getAnnouncement() : null;
@@ -56,7 +56,7 @@ class Overlay extends JsonResource
             }elseif($anc != null){
                 return [
                     'title' => $this->room,
-                    'line1' => $lecture->course . ' - ' . $lecture->office->instructor->name,
+                    'line1' => $lecture->course . ' - ' . $lecture->instructor->name,
                     'line2' => $anc->getTypeTitle() . ' - ' . $anc->note
                 ];
             }elseif($lecture != null){

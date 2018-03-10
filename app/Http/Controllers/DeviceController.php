@@ -10,6 +10,10 @@ use App\User;
 
 class DeviceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['admin']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -139,7 +143,13 @@ class DeviceController extends Controller
     public function destroy($id)
     {
         //
-        Device::find($id)->delete();
+        $device = Device::find($id);
+        if($device->deviceable_type == 'App\Hall'){
+            foreach($device->deviceable->lectures as $lecture)
+                $lecture->delete();
+        }
+        $device->deviceable->delete();
+        $device->delete();
         return response('Deleted.', 200);
     }
 }

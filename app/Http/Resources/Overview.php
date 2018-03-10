@@ -43,7 +43,7 @@ class Overview extends JsonResource
             return [
                 'hall'      => $device->room,
                 'status'    => 'Normal',
-                'info'      => $lecture->course,
+                'info'      => $lecture->course . ' - ' . $lecture->instructor->name,
                 'start'     => $lecture->start,
                 'end'       => $lecture->end,
             ];
@@ -51,7 +51,7 @@ class Overview extends JsonResource
             return [
                 'hall'      => $device->room,
                 'status'    => 'Next',
-                'info'      => $next->course,
+                'info'      => $next->course . ' - ' . $next->instructor->name ,
                 'start'     => $next->start,
                 'end'       => $next->end,
             ];

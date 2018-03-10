@@ -18,10 +18,6 @@ class Office extends Model
     }
 
     
-    public function lectures(){
-        return $this->hasMany(Lecture::class);
-    }
-
     public function instructor(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lecture;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\LectureResource;
 
 class LectureController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['instructor']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,8 @@ class LectureController extends Controller
     public function index()
     {
         //
-
+        if(!Auth::user()->isAdmin())
+            abort(401);
         return view('lecture.index');
     }
 
@@ -27,6 +35,8 @@ class LectureController extends Controller
     public function create()
     {
         //
+        if(!Auth::user()->isAdmin())
+            abort(401);
         return view('lecture.create');
     }
 
@@ -39,10 +49,12 @@ class LectureController extends Controller
     public function store(Request $request)
     {
 
+        if(!Auth::user()->isAdmin())
+            abort(401);
         $this->validate($request, [
             'course'    => 'required',
             'hall_id'   => 'required|exists:halls,id',
-            'office_id'   => 'required|exists:offices,id',
+            'user_id'   => 'required|exists:users,id',
             'start'     => 'required|date_format:H:i:s',
             'end'       => 'required|date_format:H:i:s',
             'days'      => 'required|array'
@@ -73,7 +85,8 @@ class LectureController extends Controller
     public function edit($id)
     {
         //
-
+        if(!Auth::user()->isAdmin())
+            abort(401);
 
         return view('lecture.edit', ['lecture' => Lecture::find($id)]);
     }
@@ -89,8 +102,10 @@ class LectureController extends Controller
     {
         //
 
+        if(!Auth::user()->isAdmin())
+            abort(401);
         $this->validate($request, [
-            'office_id' => 'required|int',
+            'user_id' => 'required|int',
             'hall_id'   => 'required|int',
             'start'  => 'required|date_format:H:i:s',
             'end'  => 'required|date_format:H:i:s',
@@ -99,7 +114,7 @@ class LectureController extends Controller
         ]);
 
         Lecture::find($id)->update([
-            'office_id' => $request->office_id,
+            'user_id' => $request->user_id,
             'hall_id'      => $request->hall_id,
             'start'     => $request->start,
             'end'       => $request->end,
@@ -119,9 +134,19 @@ class LectureController extends Controller
     public function destroy($id)
     {
         //
-    
+        if(!Auth::user()->isAdmin())
+            abort(401);
         Lecture::find($id)->delete();
         return response('Destroyed');
+    }
+
+
+    public function myLectures(){
+        return view('lecture.my');
+    }
+
+    public function myLecturesJson(){
+        return LectureResource::collection(Auth::user()->lectures);
     }
 
 }

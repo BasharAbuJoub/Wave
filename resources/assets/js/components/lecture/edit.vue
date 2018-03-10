@@ -4,20 +4,20 @@ export default {
     data(){
         return {
             hall: '',
-            office: '',
+            user_id: '',
             course: '',
             start: moment().toDate(),
             end: moment().toDate(),
             days: [],
             halls: {},
-            offices: {}
+            users: {}
         }
     },
     mounted(){
-        axios.get('/api/offices').then(response => this.offices = response.data.data);
+        axios.get('/api/users').then(response => this.users = response.data.data);
         axios.get('/api/halls').then(response => this.halls = response.data.data);
         this.hall = this.lecture.hall_id;
-        this.office = this.lecture.office_id;
+        this.user_id = this.lecture.user_id;
         this.course = this.lecture.course;
         this.start = moment(this.lecture.start, 'HH:mm:ss').toDate();
         this.end = moment(this.lecture.end, 'HH:mm:ss').toDate();
@@ -27,7 +27,7 @@ export default {
         update(){
             axios.patch('/lectures/' + this.lecture.id, {
                 hall_id: this.hall,
-                office_id: this.office, 
+                user_id: this.user_id, 
                 course: this.course,
                 start: moment(this.start).format('HH:mm:ss'),
                 end: moment(this.end).format('HH:mm:ss'),

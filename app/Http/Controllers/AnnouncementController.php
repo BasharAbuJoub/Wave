@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Lecture;
 use App\Announcement;
+use Illuminate\Support\Facades\Auth;
 
 class AnnouncementController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['instructor']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,9 @@ class AnnouncementController extends Controller
     public function create($lecture)
     {
         //
-
+        
+        if(Lecture::find($lecture)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
+            abort(401);
         return view('announcement.create', ['lecture'=> Lecture::find($lecture)]);
     }
 
@@ -46,6 +54,9 @@ class AnnouncementController extends Controller
             'type' => 'required|int',
             'count'=> 'required|int',
         ]);
+
+        if(Lecture::find($request->id)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
+            abort(401);
         $anc = Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
         return response($anc, 200);
     }
@@ -70,7 +81,11 @@ class AnnouncementController extends Controller
     public function edit($id)
     {
         //
-    
+
+                
+        if(Announcement::find($id)->lecture->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
+            abort(401);
+
         return View('announcement.edit', [
             'anc' => Announcement::find($id),
             'lecture' => Announcement::find($id)->lecture,
@@ -92,6 +107,10 @@ class AnnouncementController extends Controller
             'type' => 'required|boolean',
         ]);
 
+        
+        if(Announcement::find($id)->lecture->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
+            abort(401);
+
         Announcement::find($id)->update([
             'note' => $request->note,
             'type' => $request->type,
@@ -109,6 +128,8 @@ class AnnouncementController extends Controller
     {
         //
         Announcement::find($id)->delete();
+        if(!Auth::user()->isAdmin())
+            return response(route('my.lectures'), 200);
         return response(route('lectures.index'), 200);
     }
 }

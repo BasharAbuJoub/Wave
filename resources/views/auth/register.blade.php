@@ -7,28 +7,33 @@
 
                 <div class="field">
                     <label class="label">Name</label>
-                    <input type="text" class="input" v-model="data.name" placeholder="Name">
+                    <input type="text" class="input" v-model="name" placeholder="Name">
+                </div>
+
+                <div class="field">
+                    <label class="label">Employee ID</label>
+                    <input type="text" class="input" v-model="uid" placeholder="ex: XXXXXX">
                 </div>
                 
                 <div class="feild">
                     <label class="label">Bio</label>
-                    <input type="text" class="input" v-model="data.bio" placeholder="Bio">
+                    <input type="text" class="input" v-model="bio" placeholder="Bio">
                     <p class="help">The text will appear on the second line of the screen</p>
                 </div>
 
                 <div class="field">
                     <label class="label">Email</label>
-                    <input type="text" class="input" v-model="data.email" placeholder="Email">
+                    <input type="text" class="input" v-model="email" placeholder="Email">
                 </div>
 
                 <div class="field">
                     <label class="label">Password</label>
-                    <input type="password" class="input" v-model="data.password" placeholder="Password">
+                    <input type="password" class="input" v-model="password" placeholder="Password">
                 </div>
 
                 <div class="field">
                     <label class="label">Confirm Password</label>
-                    <input type="password" class="input" v-model="data.confirm_password" placeholder="Repeat your password">
+                    <input type="password" class="input" v-model="confirm_password" placeholder="Repeat your password">
                 </div>
 
 

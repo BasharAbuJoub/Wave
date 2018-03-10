@@ -1,16 +1,24 @@
 <?php
 
+use App\Http\Resources\LectureResource;
+
 Route::get('/' , 'MainController@index')->name('home');
 
 Route::prefix('/profile')->middleware('auth')->group(function(){
-    Route::get('/', 'ProfileController@edit');
+    Route::get('/', 'ProfileController@edit')->name('profile');
 
     Route::put('/', 'ProfileController@update');
+});
+
+Route::get('/home', function(){
+    return response()->redirectTo('/');
 });
 
 Route::resource('/devices', 'DeviceController');
 
 Route::resource('/lectures', 'LectureController');
+
+Route::get('/mylectures', 'LectureController@myLectures')->name('my.lectures');
 
 Route::resource('/broadcasts', 'BroadcastController');
 
@@ -28,6 +36,6 @@ Route::get('/logout', function(){
     return response()->redirectTo('/');
 })->name('logout');
 
-
+Route::get('/api/mylectures', 'LectureController@myLecturesJson');
 
 Auth::routes();

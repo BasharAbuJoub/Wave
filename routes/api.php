@@ -28,15 +28,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/overlay/{ip}', function($ip){
+    return new Overlay(Device::where('ip', $ip)->firstOrFail());
+});
 
 Route::get('/overview', 'API\ApiController@overview');
 Route::get('/overlays', function(){
     return Overlay::collection(Device::all());
 });
-
-Route::get('/devices/status', function(){
-    return ['online' => [1,2,3,4], 'offline' => [5,6,7]];
-});
+Route::get('/devices/status', 'API\ApiController@online');
 
 Route::get('/broadcasts', function(){
     return BroadcastResourse::collection(Broadcast::all());

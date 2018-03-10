@@ -6,6 +6,7 @@ use App\Device;
 use App\Office;
 use App\Lecture;
 use Carbon\Carbon;
+use App\User;
 
 $factory->define(Hall::class, function (Faker $faker) {
     return [
@@ -15,8 +16,7 @@ $factory->define(Hall::class, function (Faker $faker) {
 
 $factory->define(Office::class, function (Faker $faker) {
     return [
-        'instructor' => 'Dr.' . $faker->firstNameMale . ' ' . $faker->lastName,
-        'bio'        => $faker->sentence(6, true)
+        'user_id' => factory(User::class)->create()
     ];
 });
 
@@ -36,7 +36,8 @@ $factory->define(Lecture::class, function (Faker $faker){
         'course'    => $faker->word . ' course',
         'start'     => Carbon::now()->addMinutes(rand(0, 10))->toTimeString(),
         'end'       => Carbon::now()->addMinutes(rand(30, 120))->toTimeString(),
-        'office_id' => factory(Office::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,
+        'user_id'   => factory(Office::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->instructor->id,
+        // 'user_id' => factory(Office::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,
         'hall_id'   => factory(Hall::class)->create()->device()->create(factory(Device::class)->raw())->deviceable->id,
         'days'      => [0,2,4],
     ];

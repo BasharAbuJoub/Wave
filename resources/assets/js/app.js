@@ -24,6 +24,7 @@ Vue.component('devices', require('./components/Devices.vue'));
 Vue.component('create-device', require('./components/devices/create.vue'));
 Vue.component('edit-device', require('./components/devices/edit.vue'));
 Vue.component('lectures-table', require('./components/lecture/table.vue'));
+Vue.component('my-lectures', require('./components/lecture/my.vue'));
 Vue.component('edit-lecture', require('./components/lecture/edit.vue'));
 Vue.component('create-announcement', require('./components/announcement/create.vue'));
 Vue.component('edit-announcement', require('./components/announcement/edit.vue'));

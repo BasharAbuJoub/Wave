@@ -17370,7 +17370,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(133);
-module.exports = __webpack_require__(201);
+module.exports = __webpack_require__(203);
 
 
 /***/ }),
@@ -17403,17 +17403,18 @@ Vue.component('devices', __webpack_require__(168));
 Vue.component('create-device', __webpack_require__(171));
 Vue.component('edit-device', __webpack_require__(173));
 Vue.component('lectures-table', __webpack_require__(175));
-Vue.component('edit-lecture', __webpack_require__(178));
-Vue.component('create-announcement', __webpack_require__(180));
-Vue.component('edit-announcement', __webpack_require__(182));
-Vue.component('broadcast-table', __webpack_require__(184));
-Vue.component('create-lecture', __webpack_require__(186));
-Vue.component('create-broadcast', __webpack_require__(188));
-Vue.component('edit-broadcast', __webpack_require__(190));
-Vue.component('settings', __webpack_require__(192));
-Vue.component('devices-modal', __webpack_require__(194));
-Vue.component('register-form', __webpack_require__(197));
-Vue.component('edit-profile', __webpack_require__(199));
+Vue.component('my-lectures', __webpack_require__(178));
+Vue.component('edit-lecture', __webpack_require__(180));
+Vue.component('create-announcement', __webpack_require__(182));
+Vue.component('edit-announcement', __webpack_require__(184));
+Vue.component('broadcast-table', __webpack_require__(186));
+Vue.component('create-lecture', __webpack_require__(188));
+Vue.component('create-broadcast', __webpack_require__(190));
+Vue.component('edit-broadcast', __webpack_require__(192));
+Vue.component('settings', __webpack_require__(194));
+Vue.component('devices-modal', __webpack_require__(196));
+Vue.component('register-form', __webpack_require__(199));
+Vue.component('edit-profile', __webpack_require__(201));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17443,7 +17444,7 @@ window.moment = __webpack_require__(0);
 // try {
 //     window.$ = window.jQuery = require('jquery');
 
-//     require('bootstrap');
+//     // require('bootstrap');
 // } catch (e) {}
 
 /**
@@ -47395,7 +47396,18 @@ var render = function() {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(device.room))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(device.ip))]),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      title: "Upload code",
+                      href: "http://" + device.ip + "/upload"
+                    }
+                  },
+                  [_vm._v(_vm._s(device.ip))]
+                )
+              ]),
               _vm._v(" "),
               _c("td", [
                 !_vm.done
@@ -48111,6 +48123,112 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\lecture\\my.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-27d9ea61", Component.options)
+  } else {
+    hotAPI.reload("data-v-27d9ea61", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 179 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            lectures: [],
+            moment: moment,
+            filtered: [],
+            search: ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('/api/mylectures').then(function (response) {
+            _this.lectures = response.data.data;
+            _this.filtered = _this.lectures;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    methods: {
+        filter: function filter() {
+            var _this2 = this;
+
+            this.filtered = this.lectures.filter(function (lecture) {
+                return lecture.course.toLowerCase().includes(_this2.search.toLowerCase()) || lecture.hall.toLowerCase().includes(_this2.search.toLowerCase()) || lecture.instructor.toLowerCase().includes(_this2.search.toLowerCase());
+            });
+        },
+        remove: function remove(id) {
+            var _this3 = this;
+
+            axios.delete('/lectures/' + id).then(function (response) {
+                _this3.$toast.open({
+                    message: 'Lecture has been removed.',
+                    type: 'is-success'
+                });
+                _this3.lectures = _this3.lectures.filter(function (device) {
+                    return device.id != id;
+                });
+
+                _this3.filtered = _this3.lectures;
+            }).catch(function (error) {
+                _this3.$toast.open({
+                    message: 'Something went wrong !',
+                    type: 'is-danger'
+                });
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\lecture\\edit.vue"
 
 /* hot reload */
@@ -48133,7 +48251,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48144,26 +48262,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             hall: '',
-            office: '',
+            user_id: '',
             course: '',
             start: moment().toDate(),
             end: moment().toDate(),
             days: [],
             halls: {},
-            offices: {}
+            users: {}
         };
     },
     mounted: function mounted() {
         var _this = this;
 
-        axios.get('/api/offices').then(function (response) {
-            return _this.offices = response.data.data;
+        axios.get('/api/users').then(function (response) {
+            return _this.users = response.data.data;
         });
         axios.get('/api/halls').then(function (response) {
             return _this.halls = response.data.data;
         });
         this.hall = this.lecture.hall_id;
-        this.office = this.lecture.office_id;
+        this.user_id = this.lecture.user_id;
         this.course = this.lecture.course;
         this.start = moment(this.lecture.start, 'HH:mm:ss').toDate();
         this.end = moment(this.lecture.end, 'HH:mm:ss').toDate();
@@ -48176,7 +48294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.patch('/lectures/' + this.lecture.id, {
                 hall_id: this.hall,
-                office_id: this.office,
+                user_id: this.user_id,
                 course: this.course,
                 start: moment(this.start).format('HH:mm:ss'),
                 end: moment(this.end).format('HH:mm:ss'),
@@ -48197,13 +48315,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(181)
+var __vue_script__ = __webpack_require__(183)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48244,7 +48362,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48276,7 +48394,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }).catch(function (error) {
                 _this.$toast.open({
-                    message: 'Please fill all required fields',
+                    message: 'Something worng happened',
                     type: 'is-danger'
                 });
             });
@@ -48285,13 +48403,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(183)
+var __vue_script__ = __webpack_require__(185)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48332,7 +48450,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48387,13 +48505,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(185)
+var __vue_script__ = __webpack_require__(187)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48434,7 +48552,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48482,13 +48600,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(187)
+var __vue_script__ = __webpack_require__(189)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48529,7 +48647,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48539,20 +48657,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             hall: '',
-            office: '',
+            user_id: '',
             course: '',
             start: moment().toDate(),
             end: moment().toDate(),
             days: [],
             halls: {},
-            offices: {}
+            users: {}
         };
     },
     mounted: function mounted() {
         var _this = this;
 
-        axios.get('/api/offices').then(function (response) {
-            return _this.offices = response.data.data;
+        axios.get('/api/users').then(function (response) {
+            return _this.users = response.data.data;
         });
         axios.get('/api/halls').then(function (response) {
             return _this.halls = response.data.data;
@@ -48565,7 +48683,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/lectures', {
                 hall_id: this.hall,
-                office_id: this.office,
+                user_id: this.user_id,
                 course: this.course,
                 start: moment(this.start).format('HH:mm:ss'),
                 end: moment(this.end).format('HH:mm:ss'),
@@ -48583,13 +48701,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(189)
+var __vue_script__ = __webpack_require__(191)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48630,7 +48748,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48695,13 +48813,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(191)
+var __vue_script__ = __webpack_require__(193)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48742,7 +48860,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48817,13 +48935,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(193)
+var __vue_script__ = __webpack_require__(195)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -48864,7 +48982,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48903,15 +49021,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(195)
+var __vue_script__ = __webpack_require__(197)
 /* template */
-var __vue_template__ = __webpack_require__(196)
+var __vue_template__ = __webpack_require__(198)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48950,7 +49068,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48987,7 +49105,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49055,13 +49173,13 @@ if (false) {
 }
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(198)
+var __vue_script__ = __webpack_require__(200)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -49102,7 +49220,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49112,13 +49230,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            data: {
-                name: '',
-                email: '',
-                bio: '',
-                password: '',
-                confirm_password: ''
-            }
+            name: '',
+            email: '',
+            bio: '',
+            uid: '',
+            password: '',
+            confirm_password: ''
         };
     },
 
@@ -49127,13 +49244,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/register', {
-                name: this.data.name,
-                email: this.data.email,
-                bio: this.data.bio,
-                password: this.data.password,
-                password_confirmation: this.data.confirm_password
+                name: this.name,
+                email: this.email,
+                bio: this.bio,
+                password: this.password,
+                password_confirmation: this.confirm_password,
+                uid: this.uid
             }).then(function (response) {
-                window.location = response.data;
+                window.location = '/';
             }).catch(function (error) {
                 _this.$toast.open({
                     message: error.response.data.errors[Object.keys(error.response.data.errors)[0]][0],
@@ -49141,18 +49259,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
         }
+    }, mounted: function mounted() {
+        console.log(this.token);
     }
-
 });
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(200)
+var __vue_script__ = __webpack_require__(202)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -49193,7 +49312,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49237,7 +49356,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

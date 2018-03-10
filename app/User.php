@@ -29,18 +29,22 @@ class User extends Authenticatable
 
 
     public function isAdmin(){
-        return $this->role == 3 || true;
+        return $this->role >= 3;
     }
 
     public function isInstructor(){
-        return $this->role == 1;
+        return $this->role >= 2;
     }
 
     public function isNormal(){
-        return $this->role == 3;
+        return $this->role >= 1;
     }
 
     public function office(){
         return $this->hasOne(Office::class);
+    }
+
+    public function lectures(){
+        return $this->hasMany(Lecture::class);
     }
 }

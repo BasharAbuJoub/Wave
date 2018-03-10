@@ -10,7 +10,7 @@ class Lecture extends Model
 {
 
     protected $fillable = [
-        'course', 'start', 'end', 'office_id', 'hall_id', 'days'
+        'course', 'start', 'end', 'user_id', 'hall_id', 'days'
     ];
 
     protected $casts = [
@@ -33,8 +33,8 @@ class Lecture extends Model
         return Carbon::now()->between($this->start(), $this->end()) && $this->isToday();
     }
     
-    public function office(){
-        return $this->belongsTo(Office::class);
+    public function instructor(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 

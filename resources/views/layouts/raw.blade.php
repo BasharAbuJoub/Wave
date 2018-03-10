@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" >
+<html lang="{{ app()->getLocale() }}" style="background-color: white;overflow: hidden;" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,31 +13,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body >
+    <div id="app" >
         
         
-        <div class="hero is-info is-bold is-medium" style="background-image: url('{{asset('media/icons-background.svg')}}'); background-position: center;background-size:cover">
-            {{--  Navbar  --}}
-            <div class="hero-head">
-                @include('layouts.navbar')    
-            </div>           
-        </div>
+
 
         @yield('content')
 
 
         <div class="container is-fluid has-text-centered">
-            <br>
-            <br>
-            <hr>
-            <p>Made with ❤️ by  Student Bashar Abu Joub</p>
-            <br>
+            <p>Made with ❤️ by Student Bashar Abu Joub</p>
         </div>
 
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

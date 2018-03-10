@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             'email'     => 'admin@admin.com',
             'password'  => bcrypt('admin'),
             'role'     => 3,
+            'uid'       => 000000,
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now()
         ]);

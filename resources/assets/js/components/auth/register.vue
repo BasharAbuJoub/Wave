@@ -3,25 +3,25 @@
 export default {
     data(){
         return {
-            data: {
-                name: '',
-                email: '',
-                bio: '', 
-                password: '',
-                confirm_password: '',
-            }
+            name: '',
+            email: '',
+            bio: '',
+            uid: '',
+            password: '',
+            confirm_password: '',
         }
     },
     methods: {
         register(){
             axios.post('/register', {
-                name: this.data.name,
-                email: this.data.email,
-                bio: this.data.bio,
-                password: this.data.password,
-                password_confirmation: this.data.confirm_password
+                name: this.name,
+                email: this.email,
+                bio: this.bio,
+                password: this.password,
+                password_confirmation: this.confirm_password,
+                uid: this.uid,
             }).then(response => {
-                window.location = response.data
+                window.location = '/'
             }).catch(error => {
                 this.$toast.open({
                     message: error.response.data.errors[Object.keys(error.response.data.errors)[0]][0],
@@ -29,6 +29,8 @@ export default {
                 });
             });
         }
+    }, mounted(){
+        console.log(this.token);
     }
 
 

@@ -25,7 +25,7 @@
                 </tr>
                 <tr v-for="device in filtered">
                     <td>{{device.room}}</td>
-                    <td>{{device.ip}}</td>
+                    <td><a title="Upload code" :href="'http://' + device.ip + '/upload'">{{device.ip}}</a></td>
                     <td>
                         <span v-if="!done" class="tag is-warning">Loading</span>
                         <span v-else-if="online.includes(device.id)" class="tag is-success">Online</span>

@@ -26,7 +26,7 @@ export default {
             })
             .catch(error => {
                 this.$toast.open({
-                    message: 'Please fill all required fields',
+                    message: 'Something worng happened',
                     type: 'is-danger'
                 })
             });
