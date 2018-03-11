@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Resources\LectureResource;
+use App\Mail\AncCreated;
 
 Route::get('/' , 'MainController@index')->name('home');
 

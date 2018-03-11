@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Lecture;
 use App\Announcement;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AncCreated;
+use App\User;
 
 class AnnouncementController extends Controller
 {
@@ -35,7 +38,12 @@ class AnnouncementController extends Controller
         
         if(Lecture::find($lecture)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
             abort(401);
+        
+   
+        
         return view('announcement.create', ['lecture'=> Lecture::find($lecture)]);
+
+
     }
 
     /**
@@ -58,6 +66,11 @@ class AnnouncementController extends Controller
         if(Lecture::find($request->id)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
             abort(401);
         $anc = Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
+
+
+        foreach(User::admins() as $admin)
+            Mail::to($admin->email)->queue(new AncCreated($anc, Auth::user()));
+
         return response($anc, 200);
     }
 

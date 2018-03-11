@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function lectures(){
         return $this->hasMany(Lecture::class);
     }
+
+    public function scopeAdmins($query){
+        return $query->where('role', 3)->get();
+    }
 }
