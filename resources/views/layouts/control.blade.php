@@ -23,7 +23,10 @@
                             <a href="{{route('settings.index')}}" class="{{Active::route('settings.index')}}">
                                 <icon name="ion-ios-gear-outline" class="m-icon" size="24"></icon>Settings</a>
                         </li>
-
+                        <li>
+                            <a href="{{route('feeder.index')}}" class="{{Active::route('feeder.*')}}">
+                                <icon name="ion-ios-flame-outline" class="m-icon" size="24"></icon>Feeder</a>
+                        </li>
                         @endif
                     </ul>
                     @if(Auth::user()->isAdmin())
