@@ -11,6 +11,8 @@ Route::prefix('/profile')->middleware('auth')->group(function(){
     Route::put('/', 'ProfileController@update');
 });
 
+Route::get('/feed', 'SettingsController@feed');
+
 Route::get('/home', function(){
     return response()->redirectTo('/');
 });
