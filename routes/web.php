@@ -48,4 +48,9 @@ Route::get('/logout', function(){
     return response()->redirectTo('/');
 })->name('logout');
 
+//Users
 Auth::routes();
+
+
+Route::get('/changepassword', 'Auth\ChangePasswordController@index')->name('changepassword.index');
+Route::put('/changepassword', 'Auth\ChangePasswordController@change');

@@ -55,12 +55,18 @@
                     <ul class="menu-list">
                         <li>
                             <a href="{{route('my.lectures')}}" class="{{Active::route('my.lectures')}} {{Active::route('announcements.*')}}">
-                                <icon name="ion-ios-calendar-outline" class="m-icon" size="24"></icon>My Lectures</a>
+                            <icon name="ion-ios-calendar-outline" class="m-icon" size="24"></icon>My Lectures</a>
                         </li>
                         <li>
                             <a href="{{route('profile')}}" class="{{Active::route('profile')}}">
-                                <icon name="ion-ios-eye-outline" class="m-icon" size="24"></icon>Profile</a>
+                            <icon name="ion-ios-person-outline" class="m-icon" size="24"></icon>Profile</a>
                         </li>
+
+                        <li>
+                            <a href="{{route('changepassword.index')}}" class="{{Active::route('changepassword.index')}}">
+                            <icon name="ion-ios-eye-outline" class="m-icon" size="24"></icon>Password</a>
+                        </li>
+
                         <li>
                         <a href="{{url('logout')}}">
                                 <icon name="ion-ios-redo-outline" class="m-icon" size="24"></icon>Logout</a>

@@ -36,6 +36,7 @@ Vue.component('settings', require('./components/settings/index.vue'));
 Vue.component('devices-modal', require('./components/devices-modal.vue'));
 Vue.component('register-form', require('./components/auth/register.vue'))
 Vue.component('edit-profile', require('./components/profile/edit.vue'));
+Vue.component('change-pass', require('./components/auth/change-pass.vue'));
 
 
 
