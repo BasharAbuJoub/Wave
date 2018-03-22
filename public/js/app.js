@@ -47273,6 +47273,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -47291,12 +47308,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.devices = response.data.data;
       _this.filtered = response.data.data;
     });
-    axios.get("api/devices/status").then(function (response) {
-      _this.online = response.data.online;
-      _this.done = true;
-    }).catch(function (error) {
-      return _this.status = error;
-    });
+    // axios
+    //   .get("api/devices/status")
+    //   .then(response => {
+    //     this.online = response.data.online;
+    //     this.done = true;
+    //   })
+    //   .catch(error => (this.status = error));
   },
 
   methods: {
@@ -47326,6 +47344,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return device.id != id;
       });
       this.filtered = this.devices;
+    }, lastSeen: function lastSeen(device) {
+      return Math.floor(moment.duration(moment().diff(moment(device.last_seen, 'YYYY-MM-DD HH:mm'))).asMinutes());
     }
   }
 });
@@ -47410,19 +47430,67 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
-                !_vm.done
-                  ? _c("span", { staticClass: "tag is-warning" }, [
-                      _vm._v("Loading")
-                    ])
-                  : _vm.online.includes(device.id)
-                    ? _c("span", { staticClass: "tag is-success" }, [
-                        _vm._v("Online")
-                      ])
-                    : _c("span", { staticClass: "tag is-danger" }, [
-                        _vm._v("Offline")
-                      ])
-              ]),
+              _c(
+                "td",
+                [
+                  _vm.lastSeen(device) <= 2
+                    ? _c(
+                        "b-tooltip",
+                        {
+                          attrs: {
+                            label:
+                              "Last seen " +
+                              _vm.lastSeen(device) +
+                              " minutes ago.",
+                            position: "is-top"
+                          }
+                        },
+                        [
+                          _c("span", { staticClass: "tag is-success" }, [
+                            _vm._v("Online")
+                          ])
+                        ]
+                      )
+                    : _vm.lastSeen(device) > 2 && _vm.lastSeen(device) <= 5
+                      ? _c(
+                          "b-tooltip",
+                          {
+                            attrs: {
+                              label:
+                                "Last seen " +
+                                _vm.lastSeen(device) +
+                                " minutes ago.",
+                              position: "is-top"
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "tag is-warning" }, [
+                              _vm._v("Warning")
+                            ])
+                          ]
+                        )
+                      : _vm.lastSeen(device) > 5
+                        ? _c(
+                            "b-tooltip",
+                            {
+                              attrs: {
+                                label:
+                                  "Last seen " +
+                                  _vm.lastSeen(device) +
+                                  " minutes ago.",
+                                position: "is-top"
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "tag is-danger" }, [
+                                _vm._v("Dead")
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("td", [
                 _c("span", { staticClass: "tag " }, [

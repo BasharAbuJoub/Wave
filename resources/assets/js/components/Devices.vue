@@ -27,9 +27,26 @@
                     <td>{{device.room}}</td>
                     <td><a title="Upload code" :href="'http://' + device.ip + '/upload'">{{device.ip}}</a></td>
                     <td>
-                        <span v-if="!done" class="tag is-warning">Loading</span>
-                        <span v-else-if="online.includes(device.id)" class="tag is-success">Online</span>
-                        <span v-else class="tag is-danger">Offline</span>
+                        <!-- <span v-if="!done" class="tag is-warning">Loading</span> -->
+                        <!-- <span v-else-if="online.includes(device.id)" class="tag is-success">Online</span> -->
+                        <!-- <span v-else class="tag is-danger">Offline</span> -->
+
+                        
+                        <b-tooltip v-if="lastSeen(device) <= 2" :label="'Last seen ' + lastSeen(device) + ' minutes ago.'"
+                            position="is-top">
+                            <span class="tag is-success">Online</span>
+                        </b-tooltip>
+
+                        <b-tooltip v-else-if="lastSeen(device) > 2 && lastSeen(device) <= 5 " :label="'Last seen ' + lastSeen(device) + ' minutes ago.'"
+                            position="is-top">
+                            <span class="tag is-warning">Warning</span>
+                        </b-tooltip>
+
+                        <b-tooltip v-else-if="lastSeen(device) > 5 " :label="'Last seen ' + lastSeen(device) + ' minutes ago.'"
+                            position="is-top">
+                            <span class="tag is-danger">Dead</span>
+                        </b-tooltip>
+
                     </td>
                     <td><span class="tag ">{{device.type}}</span></td>
                     <td :title="device.bio">
@@ -75,13 +92,13 @@ export default {
       this.devices = response.data.data;
       this.filtered = response.data.data;
     });
-    axios
-      .get("api/devices/status")
-      .then(response => {
-        this.online = response.data.online;
-        this.done = true;
-      })
-      .catch(error => (this.status = error));
+    // axios
+    //   .get("api/devices/status")
+    //   .then(response => {
+    //     this.online = response.data.online;
+    //     this.done = true;
+    //   })
+    //   .catch(error => (this.status = error));
   },
   methods: {
     filter: function() {
@@ -112,6 +129,9 @@ export default {
         return device.id != id;
       });
       this.filtered = this.devices;
+    },lastSeen(device){
+      return Math.floor(moment.duration(moment().diff(moment(device.last_seen, 'YYYY-MM-DD HH:mm'))).asMinutes());
+
     }
   }
 };

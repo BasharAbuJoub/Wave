@@ -10,7 +10,7 @@ class Device extends Model
     //
 
     protected $fillable = [
-        'ip', 'room', 'deviceable_id'
+        'ip', 'room', 'deviceable_id', 'last_seen'
     ];
 
     public function deviceable(){
@@ -51,10 +51,8 @@ class Device extends Model
                 return $lecture->isToday() && $lecture->start()->gt(Carbon::now());
             })->first();
         }
-
-
     }
 
-    
+
 
 }

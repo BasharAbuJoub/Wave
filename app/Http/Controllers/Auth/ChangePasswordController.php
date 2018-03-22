@@ -38,8 +38,8 @@ class ChangePasswordController extends Controller
 
             $request->session()->flash('success', 'Password changed');
             return response('Updated', 200);
-
         }
+        
         return response('Old password is incorrect', 422);
 
     }

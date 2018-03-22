@@ -21,7 +21,9 @@ class Overlay extends JsonResource
         $anc = $lecture != null ? $lecture->getAnnouncement() : null;
         $next = $this->getNextLecture();
         $type = $this->deviceable_type == 'App\Hall' ? 0 : 1;
-
+        $this->update([
+            'last_seen' => Carbon::now(),
+        ]);
         #Office
         if($type == 1){
             if($anc != null){
