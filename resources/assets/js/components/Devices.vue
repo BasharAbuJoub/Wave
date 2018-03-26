@@ -32,7 +32,7 @@
                         <!-- <span v-else class="tag is-danger">Offline</span> -->
 
                         
-                        <b-tooltip v-if="lastSeen(device) <= 2" :label="'Last seen ' + lastSeen(device) + ' minutes ago.'"
+                        <b-tooltip v-if="lastSeen(device) <= 2" :label="':D'"
                             position="is-top">
                             <span class="tag is-success">Online</span>
                         </b-tooltip>
@@ -42,7 +42,7 @@
                             <span class="tag is-warning">Warning</span>
                         </b-tooltip>
 
-                        <b-tooltip v-else-if="lastSeen(device) > 5 " :label="'Last seen ' + lastSeen(device) + ' minutes ago.'"
+                        <b-tooltip v-else-if="lastSeen(device) > 5 " :label="'Last seen ' + device.last_seen + ' .'"
                             position="is-top">
                             <span class="tag is-danger">Dead</span>
                         </b-tooltip>
