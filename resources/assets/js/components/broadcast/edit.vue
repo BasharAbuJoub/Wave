@@ -16,8 +16,8 @@ export default {
 
         this.line1 = this.broadcast.line1;
         this.line2 = this.broadcast.line2;
-        this.start = moment(this.broadcast.start, 'HH:mm:sss').toDate();
-        this.end = moment(this.broadcast.end, 'HH:mm:sss').toDate();
+        this.start = moment(this.broadcast.start.date).toDate();
+        this.end = moment(this.broadcast.end.date).toDate();
         this.devices = this.broadcast.devices;
 
         axios.get('/api/halls').then(response => {

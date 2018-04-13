@@ -7,7 +7,6 @@ use Carbon\Carbon;
 
 class Device extends Model
 {
-    //
 
     protected $fillable = [
         'ip', 'room', 'deviceable_id', 'last_seen'
@@ -44,11 +43,11 @@ class Device extends Model
 
         if($this->type() == 0){
             return $this->deviceable->lectures()->orderBy('start')->get()->filter(function($lecture, $key){
-                return $lecture->isToday() && $lecture->start()->gt(Carbon::now());
+                return $lecture->isToday() && $lecture->start->gt(Carbon::now());
             })->first();
         }else{
             return $this->deviceable->instructor->lectures()->orderBy('start')->get()->filter(function($lecture, $key){
-                return $lecture->isToday() && $lecture->start()->gt(Carbon::now());
+                return $lecture->isToday() && $lecture->start->gt(Carbon::now());
             })->first();
         }
     }

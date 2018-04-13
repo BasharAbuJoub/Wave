@@ -17,12 +17,17 @@ class Lecture extends Model
         'days' => 'array'
     ];
 
-    public function start(){
-        return Carbon::parse($this->start);
-    }
+    protected $dates = [
+        'start', 'end'
+    ];
 
-    public function end(){
-        return Carbon::parse($this->end);
+    protected $dateFormat = "H:i:s";
+
+    public function getStartAttribute($value){
+        return Carbon::parse($value);
+    }
+    public function getEndAttribute($value){
+        return Carbon::parse($value)->subMinutes(($this->start->diffInMinutes(Carbon::parse($value)) / 60) * 10);
     }
 
     public function isToday(){
@@ -30,7 +35,7 @@ class Lecture extends Model
     }
 
     public function isActive(){
-        return Carbon::now()->between($this->start(), $this->end()) && $this->isToday();
+        return Carbon::now()->between($this->start, $this->end) && $this->isToday();
     }
     
     public function instructor(){
@@ -47,6 +52,7 @@ class Lecture extends Model
     }
 
     public function addAnnouncement($count, $type, $note){
+  
         $today = Carbon::now()->dayOfWeek;
         $nextIndex = 0;
         $days = $this->days;
@@ -72,10 +78,10 @@ class Lecture extends Model
         for($i = $nextIndex; $i < ($count - 1) + $nextIndex ; $i++)
             $sum+= $prefix[$i % count($prefix)];
 
-        $end =  Carbon::parse($this->end)->addDays($sum);
+        $end =  $this->end->addDays($sum);
         $anc = $this->announcements()->create(['type' => $type, 'note' => $note, 'until' => $end]);
         return $anc;
-        //dispatch(new AnnouncementDeleteJob($anc))->delay($end);
+  
     }
 
 
@@ -83,14 +89,5 @@ class Lecture extends Model
         return $this->hasMany(Announcement::class);
     }
 
-    /*
-    (in + (n - 1)) % l : index of the last deleted lecture
-    days[(in + (n - 1)) % l] - today + ((n/size) * 7)
-    l : length of the array (days)
-    n : number of lectures
-    in : index of the next lecture
-
-
-    */
 
 }

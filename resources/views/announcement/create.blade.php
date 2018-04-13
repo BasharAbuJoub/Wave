@@ -4,7 +4,7 @@
     <div class="columns">
         <div class="column is-6 is-offset-3">
             <div class="box">
-            <p>Lecture : @{{lecture.course}} - @{{lecture.instructor}} - @{{lecture.start}}</p>
+            <p>Lecture : @{{lecture.course}} - @{{lecture.start.date}}</p>
             <br>
 
                 <form action="{{route('announcements.store')}}" method="post">

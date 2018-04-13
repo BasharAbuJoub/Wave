@@ -22,8 +22,8 @@
             <td>{{lecture.course}}</td>
             <td>{{lecture.hall}}</td>
             <td>{{lecture.instructor}}</td>
-            <td>{{moment(lecture.start, 'HH:mm:ss').format('HH:mm')}}</td>
-            <td>{{moment(lecture.end, 'HH:mm:ss').format('HH:mm')}}</td>
+            <td>{{moment(lecture.start.date, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}}</td>
+            <td>{{moment(lecture.end.date, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}}</td>
             <td><span v-for="day in lecture.days">{{moment().day(day).format('dd')}}. </span></td>
             <td>
 

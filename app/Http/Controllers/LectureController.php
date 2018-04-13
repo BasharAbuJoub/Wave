@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Lecture;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LectureResource;
+use Carbon\Carbon;
 
 class LectureController extends Controller
 {
@@ -55,12 +56,11 @@ class LectureController extends Controller
             'course'    => 'required',
             'hall_id'   => 'required|exists:halls,id',
             'user_id'   => 'required|exists:users,id',
-            'start'     => 'required|date_format:H:i:s',
-            'end'       => 'required|date_format:H:i:s',
+            'start'     => 'required',
+            'end'       => 'required',
             'days'      => 'required|array'
 
         ]);
-
         Lecture::create($request->all());
         return response(route('lectures.index'));
     }
@@ -107,8 +107,8 @@ class LectureController extends Controller
         $this->validate($request, [
             'user_id' => 'required|int',
             'hall_id'   => 'required|int',
-            'start'  => 'required|date_format:H:i:s',
-            'end'  => 'required|date_format:H:i:s',
+            'start'  => 'required',
+            'end'  => 'required',
             'course' => 'required',
             'days'  => 'required|array'  
         ]);

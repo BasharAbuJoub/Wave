@@ -16,7 +16,14 @@ class Broadcast extends Model
     protected $casts = [
         'devices' => 'array'
     ];
+    
+    public function getStartAttribute($value){
+        return Carbon::parse($value);
+    }
 
+    public function getEndAttribute($value){
+        return Carbon::parse($value);
+    }
 
     public function start(){
         return Carbon::parse($this->start);

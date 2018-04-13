@@ -15,8 +15,8 @@
                 <td><icon name="ion-ios-arrow-right" size="18"></icon> {{item.hall}}</td>
                 <td>{{item.status}}</td>
                 <td>{{item.info}}</td>
-                <td>{{item.start}}</td>
-                <td>{{item.end}}</td>
+                <td>{{item.start != '-' ? moment(item.start.date).format('HH:mm') : '-'}}</td>
+                <td>{{item.end != '-' ? moment(item.end.date).format('HH:mm') : '-'}}</td>
             </tr>
 
 
@@ -29,6 +29,7 @@
 export default {
     data(){
         return {
+            moment: moment,
             data: {},
         }
     },

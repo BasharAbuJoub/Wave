@@ -35,7 +35,6 @@ class AnnouncementController extends Controller
     public function create($lecture)
     {
         //
-        
         if(Lecture::find($lecture)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
             abort(401);
         
@@ -65,8 +64,9 @@ class AnnouncementController extends Controller
 
         if(Lecture::find($request->id)->instructor->id != Auth::user()->id && !Auth::user()->isAdmin())
             abort(401);
+       
         $anc = Lecture::find($request->id)->addAnnouncement($request->count, $request->type, $request->note);
-
+        
 
         foreach(User::admins() as $admin)
             Mail::to($admin->email)->queue(new AncCreated($anc, Auth::user()));

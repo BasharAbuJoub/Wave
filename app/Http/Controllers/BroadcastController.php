@@ -42,13 +42,11 @@ class BroadcastController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'line1'     => 'required',
-            'line2'     => 'required',
-            'start'     => 'required|date_format:H:i:s',    
-            'end'       => 'required|date_format:H:i:s',
+            'start'     => 'required',    
+            'end'       => 'required',
             'devices'   => 'required|array',    
         ]);
-
+        
         Broadcast::create($request->all());
 
         return route('broadcasts.index');
@@ -88,10 +86,8 @@ class BroadcastController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'line1'     => 'required',
-            'line2'     => 'required',
-            'start'     => 'required|date_format:H:i:s',    
-            'end'       => 'required|date_format:H:i:s',
+            'start'     => 'required',    
+            'end'       => 'required',
             'devices'   => 'required|array',    
         ]);
 

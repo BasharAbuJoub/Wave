@@ -21,10 +21,9 @@ class UpdateDevices extends Command
     {
         parent::__construct();
     }
-
+    
     public function handle()
     {
-
 
 
         $devices = Device::all();
@@ -37,10 +36,10 @@ class UpdateDevices extends Command
             $overlay = new DeviceOverlay($device);
 
             try{
-            
+
                 $client->get('http://' . $device->ip . '/display?l=0&m=' . $overlay->title);
                 $client->get('http://' . $device->ip . '/displaysmall?l=2&m=' . $overlay->line1);
-                $client->get('http://' . $device->ip . '/displaysmall?l=3&m=' . $overlay->line1);
+                $client->get('http://' . $device->ip . '/displaysmall?l=3&m=' . $overlay->line2);
 
                 $device->update([
                     'last_seen' => Carbon::now(),
@@ -53,7 +52,7 @@ class UpdateDevices extends Command
         }
 
 
-        echo "Skipped : " . implode(', ' , array_pluck($skipped, 'room')); 
+        echo "Skipped : " . implode(', ' , array_pluck($skipped, 'room'));
 
     }
 }

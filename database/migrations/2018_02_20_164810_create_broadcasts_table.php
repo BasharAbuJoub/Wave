@@ -15,8 +15,8 @@ class CreateBroadcastsTable extends Migration
     {
         Schema::create('broadcasts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('line1');
-            $table->string('line2');
+            $table->string('line1')->nullable();
+            $table->string('line2')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->json('devices');

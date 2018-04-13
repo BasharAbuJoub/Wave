@@ -22,8 +22,8 @@
             <tr v-for="broadcast in broadcasts">
                 <td>@{{broadcast.line1}}</td>
                 <td>@{{broadcast.line2}}</td>
-                <td>@{{broadcast.start}}</td>
-                <td>@{{broadcast.end}}</td>
+                <td>@{{moment(broadcast.start.date).format('hh:mm')}}</td>
+                <td>@{{moment(broadcast.end.date).format('hh:mm')}}</td>
                 <td>
                     <devices-modal :data="broadcast.devices"></devices-modal>
                 </td>

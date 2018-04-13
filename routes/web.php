@@ -5,6 +5,8 @@ use App\Mail\AncCreated;
 
 
 // Single Use Actions
+Route::view('/users', 'user.index')->middleware('admin');
+
 Route::get('/' , 'MainController@index')->name('home');
 
 Route::prefix('/profile')->middleware('auth')->group(function(){

@@ -6,8 +6,8 @@ export default {
             hall: '',
             user_id: '',
             course: '',
-            start: moment().toDate(),
-            end: moment().toDate(),
+            start: null,
+            end: null,
             days: [],
             halls: {},
             users: {}
@@ -19,8 +19,8 @@ export default {
         this.hall = this.lecture.hall_id;
         this.user_id = this.lecture.user_id;
         this.course = this.lecture.course;
-        this.start = moment(this.lecture.start, 'HH:mm:ss').toDate();
-        this.end = moment(this.lecture.end, 'HH:mm:ss').toDate();
+        this.start = moment(this.lecture.start.date).toDate();
+        this.end = moment(this.lecture.end.date).toDate();
         this.days = this.lecture.days;
     },
     methods: {

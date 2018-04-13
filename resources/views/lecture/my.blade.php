@@ -19,8 +19,8 @@
             <tr v-for="lecture in filtered">
                 <td>@{{lecture.course}}</td>
                 <td>@{{lecture.hall}}</td>
-                <td>@{{moment(lecture.start, 'HH:mm:ss').format('HH:mm')}}</td>
-                <td>@{{moment(lecture.end, 'HH:mm:ss').format('HH:mm')}}</td>
+                <td>@{{moment(lecture.start.date).format('HH:mm')}}</td>
+                <td>@{{moment(lecture.end.date).format('HH:mm')}}</td>
                 <td><span v-for="day in lecture.days">@{{moment().day(day).format('dd')}}. </span></td>
                 <td>
                     <b-tooltip v-if="lecture.announcement" :label="lecture.announcement" position="is-top">

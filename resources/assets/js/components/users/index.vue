@@ -4,12 +4,13 @@ export default {
         return{
             users: [],
             filtered: [],
+            search: ''
         }
     },
     mounted(){
-        axios.get('/api/users').then(reponse => {
+        axios.get('/api/users').then(response => {
             this.users = response.data.data;
-            this.filtered = this.users;
+            this.filtered = response.data.data;
         }).catch(error => {
             this.$toast.open({
                 message: 'Something worng happened while loading users.',
@@ -18,9 +19,9 @@ export default {
         });
     },
     methods: {
-        search(){
+        filter(){
             this.filtered = this.users.filter(user => {
-                return user.id.toLo
+                return user.name.toLowerCase().includes(this.search.toLowerCase());
             });
         }
     }
