@@ -153,6 +153,7 @@ return [
 
         Rukhsar\ActiveRoute\ActiveRouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
         /*
          * Application Service Providers...
          */

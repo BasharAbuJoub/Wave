@@ -5,7 +5,9 @@ use App\Mail\AncCreated;
 
 
 // Single Use Actions
-Route::view('/users', 'user.index')->middleware('admin');
+Route::view('/users', 'user.index')->middleware('admin')->name('users.index');
+
+Route::get('/user/{id}', 'ProfileController@user')->middleware('admin')->name('user.show');
 
 Route::get('/' , 'MainController@index')->name('home');
 

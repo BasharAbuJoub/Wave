@@ -1,18 +1,13 @@
 <?php 
-
-
 namespace App\Helpers;
 
 use App\Device;
-
-
 
 class DeviceOverlay{
 
     public $title;
     public $line1;
     public $line2;
-
 
     public function __construct(Device $device)
     {
@@ -23,8 +18,6 @@ class DeviceOverlay{
         $next = $device->getNextLecture();
         $type = $device->deviceable_type == 'App\Hall' ? 0 : 1;
     
-
-
         #Office
         if($type == 1){
             if($anc != null){
@@ -67,15 +60,6 @@ class DeviceOverlay{
                 $this->line1 = 'No lecture';
                 $this->line2 = '';
             }
-
-
-
         }
-
-
-        
     }
-
-
-
 }

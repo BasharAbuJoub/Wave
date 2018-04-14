@@ -21,9 +21,9 @@
                 <td>@{{user.name}}</td>
                 <td>@{{user.email}}</td>
                 <td>@{{user.uid}}</td>
-                <td>@{{user.role}}</td>
+                <td>@{{getRole(user.role)}}</td>
                 <td>
-                    <a href="button is-small is-info">Profile</a>
+                <a :href="'/user/' + user.id">Profile</a>
                 </td>
             </tr>
         </table>

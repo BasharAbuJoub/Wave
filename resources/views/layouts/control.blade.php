@@ -27,6 +27,12 @@
                             <a href="{{route('feeder.index')}}" class="{{Active::route('feeder.*')}}">
                                 <icon name="ion-ios-flame-outline" class="m-icon" size="24"></icon>Feeder</a>
                         </li>
+                        <li>
+                            <a href="{{route('users.index')}}" class="{{Active::route('users.index')}}">
+                                <icon name="ion-ios-people-outline" class="m-icon" size="24"></icon>Users</a>
+                        </li>
+                        
+
                         @endif
                     </ul>
                     @if(Auth::user()->isAdmin())
@@ -54,7 +60,7 @@
                     </p>
                     <ul class="menu-list">
                         <li>
-                            <a href="{{route('my.lectures')}}" class="{{Active::route('my.lectures')}} {{Active::route('announcements.*')}}">
+                            <a href="{{route('my.lectures')}}" class="{{Active::route('my.lectures')}}">
                             <icon name="ion-ios-calendar-outline" class="m-icon" size="24"></icon>My Lectures</a>
                         </li>
                         <li>

@@ -46,6 +46,13 @@ Route::get('/users', function(){
     return UserResourse::collection(User::all());
 });
 
+Route::get('/user/{id}', function($id){
+    return new UserResourse(User::find($id));
+});
+
+Route::put('/user/{user}', 'ProfileController@setRole')->middleware(['auth:api', 'admin']);
+
+
 Route::get('/halls', function(){
     return HallResource::collection(Hall::all());
 });

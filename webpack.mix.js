@@ -18,6 +18,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 mix.disableNotifications();
 
 mix.browserSync({
-    proxy: 'wave.test',
+    proxy: 'wave2.test',
     notify: false
 });
